@@ -34,7 +34,7 @@ document
       .then((data) => {
         if (data.data) {
           alert("New post created successfully!");
-          window.location.href = "/post/index.html"; // Redirect back to the posts list
+          window.location.href = "/post/index.html";
         } else {
           alert("Failed to create post: " + data.message);
         }

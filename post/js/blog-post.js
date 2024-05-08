@@ -15,33 +15,25 @@ fetch(blogPostApi)
     const post = data.data;
     const container = document.createElement("div");
 
-    const ingredients = post.body ? post.body.split(", ").slice(1) : []; // Skip the first element "Ingredients"
-    let ingredientsMarkup = "<ul>";
-    ingredients.forEach((ingredient) => {
-      ingredientsMarkup += `<li>${ingredient}</li>`;
-    });
-    ingredientsMarkup += "</ul>";
-
     container.innerHTML = `
-            <h2>${post.title}</h2>
-            ${
-              post.media
-                ? `<img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;">`
-                : ""
-            }
-            ${
-              ingredients.length > 0
-                ? `<h3>Ingredients</h3>${ingredientsMarkup}`
-                : ""
-            }
-            ${
-              post.tags && post.tags.length
-                ? `<p>Tag: ${post.tags.join(", ")}</p>`
-                : ""
-            }
-            
-            <p>Author: ${post.author.name}</p>
-        `;
+          <h2>${post.title}</h2>
+          ${
+            post.media
+              ? `<img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;">`
+              : ""
+          }
+          <p>${post.body}</p>
+          ${
+            post.tags && post.tags.length
+              ? `<p>Tag: ${post.tags.join(", ")}</p>`
+              : ""
+          }
+          <p>Author: ${post.author.name}</p>
+      `;
     postContent.appendChild(container);
   })
-  .catch((error) => console.error("Error fetching data:", error));
+  .catch((error) => {
+    console.error("Error fetching data:", error);
+    postContent.innerHTML =
+      "<p>Error fetching the blog post. Please try again later.</p>";
+  });

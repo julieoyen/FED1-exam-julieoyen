@@ -22,39 +22,20 @@ document.addEventListener("DOMContentLoaded", function () {
     posts.forEach((post) => {
       const postElement = document.createElement("div");
       postElement.innerHTML = `
-                <h3>${post.title}</h3>
-                <p>${
-                  post.media
-                    ? `<img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;">`
-                    : ""
-                }</p>
-                <button onclick="editPost('${post.id}')">Edit</button>
-                <button onclick="deletePost('${post.id}')">Delete</button>
-            `;
+              <h3>${post.title}</h3>
+              <p>${
+                post.media
+                  ? `<img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;">`
+                  : ""
+              }</p>
+              <button onclick="location.href='/post/edit.html?postId=${
+                post.id
+              }'">Edit</button>
+              <button onclick="deletePost('${post.id}')">Delete</button>
+          `;
       container.appendChild(postElement);
     });
   }
-
-  window.editPost = function (id) {
-    const title = prompt("Enter new title:");
-    const body = prompt("Enter new body:");
-    const editUrl = `https://v2.api.noroff.dev/blog/posts/${username}/${id}`;
-    fetch(editUrl, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title, body }),
-    }).then((response) => {
-      if (response.ok) {
-        fetchPosts(); // Refresh posts after editing
-        alert("Post updated successfully!");
-      } else {
-        alert("Failed to update post.");
-      }
-    });
-  };
 
   window.deletePost = function (id) {
     const deleteUrl = `https://v2.api.noroff.dev/blog/posts/${username}/${id}`;
@@ -66,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       }).then((response) => {
         if (response.ok) {
-          fetchPosts(); // Refresh posts after deletion
+          fetchPosts();
           alert("Post deleted successfully!");
         } else {
           alert("Failed to delete post.");

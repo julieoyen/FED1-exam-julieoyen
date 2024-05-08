@@ -1,0 +1,23 @@
+h1{
+    text-align: center;
+    
+}
+
+#newPostForm{
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+}
+
+#submitBTN{
+margin: 5px 100px;
+padding: 5px;
+}
+
+input{
+    margin: 10px 0px;
+}
+
+label{
+    margin-top: 5px;
+}

@@ -1,0 +1,4 @@
+#editPostContainer{
+    display: flex;
+    flex-direction: column;
+}

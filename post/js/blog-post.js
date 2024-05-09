@@ -19,7 +19,7 @@ fetch(blogPostApi)
           <h2>${post.title}</h2>
           ${
             post.media
-              ? `<img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;">`
+              ? `<img src="${post.media.url}" alt="${post.media.alt}" class="postImg">`
               : ""
           }
           <p>${post.body}</p>

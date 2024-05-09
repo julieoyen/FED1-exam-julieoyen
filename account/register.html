@@ -26,38 +26,39 @@
           placeholder="email@stud.noroff.no"
           required
         />
+
         <label for="username">Username:</label>
         <input
-          type="username"
+          type="text"
           id="username"
           name="username"
           placeholder="required"
           required
         />
+
         <label for="password">Password:</label>
         <input
           type="password"
-          id="repeatPassword"
+          id="password"
           name="password"
           placeholder="required"
           required
+          minlength="8"
         />
-        <label for="password">Repeat password:</label>
+
+        <label for="repeatPassword">Repeat password:</label>
         <input
           type="password"
           id="repeatPassword"
-          name="password"
+          name="repeatPassword"
           placeholder="required"
           required
+          minlength="8"
         />
+
         <label for="avatar">Avatar URL:</label>
-        <input
-          type="avatar"
-          id="avatar"
-          name="avatar"
-          placeholder="optional"
-          optional
-        />
+        <input type="text" id="avatar" name="avatar" placeholder="optional" />
+
         <button type="submit">REGISTER</button>
       </form>
     </div>

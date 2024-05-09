@@ -14,3 +14,11 @@ h3{
 p{
     font-family: 'nunito', 'Times New Roman', Times, serif;
 }
+
+.registerPage,
+.loginPage{
+    margin: 50px;
+    padding: 50px;
+    border: #278D2B solid ;
+
+}

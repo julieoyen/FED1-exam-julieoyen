@@ -22,3 +22,16 @@ p{
     border: #278D2B solid ;
 
 }
+
+button{
+    background-color: #278D2B ;
+    color: white;
+    border-style: none;
+    border-radius: 5px;
+}
+
+img{margin: 5px 100px; 
+    max-width: 350px; 
+    max-height: 350px;
+    object-fit: cover;
+    }

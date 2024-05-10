@@ -16,6 +16,25 @@
     <title>Unprocessed food - live well</title>
   </head>
   <body>
-    <div id="posts-container"></div>
+    <h1>
+      Eating unprocessed,
+      <h1>Eating Well</h1>
+    </h1>
+    <div class="carousel">
+      <div id="posts-container" class="carousel-slides"></div>
+      <button class="carousel-control prev" onclick="moveSlide(-1)">
+        &#10094;
+      </button>
+      <button class="carousel-control next" onclick="moveSlide(1)">
+        &#10095;
+      </button>
+    </div>
+    <div id="pagination-container" class="pagination-section">
+      <div id="posts-pagination" class="posts-pagination"></div>
+      <div class="pagination-controls">
+        <button onclick="changePage(-1)">Prev</button>
+        <button onclick="changePage(1)">Next</button>
+      </div>
+    </div>
   </body>
 </html>

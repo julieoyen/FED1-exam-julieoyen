@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         document.getElementById("title").value = data.data.title;
         document.getElementById("body").value = data.data.body;
+        document.getElementById("img").value = data.data.media.url;
+        document.getElementById("tags").value = data.data.tags;
       })
       .catch((error) => console.error("Error fetching post details:", error));
   }
@@ -25,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.submitEdit = function () {
     const title = document.getElementById("title").value;
     const body = document.getElementById("body").value;
+    const img = document.getElementById("img").value;
     const editUrl = `https://v2.api.noroff.dev/blog/posts/${username}/${postId}`;
     fetch(editUrl, {
       method: "PUT",
@@ -32,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, body }),
+      body: JSON.stringify({ title, body, img }),
     })
       .then((response) => {
         if (response.ok) {

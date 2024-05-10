@@ -29,6 +29,7 @@ fetch(blogPostApi)
               : ""
           }
           <p>Author: ${post.author.name}</p>
+          <p>Posted: ${post.created}</p>
       `;
     postContent.appendChild(container);
   })

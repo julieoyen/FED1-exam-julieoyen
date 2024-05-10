@@ -28,10 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
                   ? `<img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;">`
                   : ""
               }</p>
-              <button onclick="location.href='/post/edit.html?postId=${
+              <div class="buttons">
+              <button  onclick="location.href='/post/edit.html?postId=${
                 post.id
               }'">Edit</button>
               <button onclick="deletePost('${post.id}')">Delete</button>
+              </div>
           `;
       container.appendChild(postElement);
     });

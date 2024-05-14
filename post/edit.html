@@ -15,18 +15,30 @@
     <script src="/post/js/edit.js" defer></script>
   </head>
   <body>
-    <div id="editPostContainer">
-      <input
-        type="text"
-        id="title"
-        placeholder="Title"
-        oninput="updatePreview()"
-      />
-      <textarea id="body" placeholder="Recipe"></textarea>
-      <textarea id="img" placeholder="Image URL"></textarea>
-      <textarea id="tags" placeholder="Tags"></textarea>
+    <h1>Edit Post</h1>
+    <form id="editPostForm" onsubmit="submitEdit(event)">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required />
 
-      <button onclick="submitEdit()">Save Changes</button>
-    </div>
+      <label for="listItem">Add List Item:</label>
+      <input type="text" id="listItem" />
+      <button type="button" onclick="addListItem()">Add to List</button>
+
+      <ul id="list"></ul>
+
+      <label for="body">Body:</label>
+      <textarea id="body" name="body"></textarea>
+
+      <label for="tags">Tags (comma-separated):</label>
+      <input type="text" id="tags" name="tags" />
+
+      <label for="mediaUrl">Media URL:</label>
+      <input type="url" id="mediaUrl" name="mediaUrl" />
+
+      <label for="mediaAlt">Media Alt Text:</label>
+      <input type="text" id="mediaAlt" name="mediaAlt" />
+
+      <button id="submitBTN" type="submit">Save Changes</button>
+    </form>
   </body>
 </html>

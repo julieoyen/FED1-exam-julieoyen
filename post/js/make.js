@@ -3,6 +3,14 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault();
 
+    const userName = sessionStorage.getItem("userName");
+    const authToken = sessionStorage.getItem("authToken");
+
+    if (!userName || !authToken) {
+      alert("User not authenticated. Please log in.");
+      return;
+    }
+
     const title = document.getElementById("title").value;
     const body = document.getElementById("body").value;
     const tags = document
@@ -11,13 +19,18 @@ document
       .map((tag) => tag.trim());
     const mediaUrl = document.getElementById("mediaUrl").value;
     const mediaAlt = document.getElementById("mediaAlt").value;
-    const postUrl = `https://v2.api.noroff.dev/blog/posts/${sessionStorage.getItem(
-      "userName"
-    )}`;
+    const postUrl = `https://v2.api.noroff.dev/blog/posts/${userName}`;
+
+    const listItems = document.querySelectorAll("#list li");
+    let listHTML = "<ul>";
+    listItems.forEach((item) => {
+      listHTML += `<li>${item.firstChild.textContent}</li>`;
+    });
+    listHTML += "</ul>";
 
     const postData = {
       title,
-      body,
+      body: listHTML + body,
       tags,
       media: mediaUrl ? { url: mediaUrl, alt: mediaAlt } : undefined,
     };
@@ -25,7 +38,7 @@ document
     fetch(postUrl, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(postData),
@@ -44,3 +57,22 @@ document
         alert("Error creating post: " + error.message);
       });
   });
+
+function addListItem() {
+  const listItemInput = document.getElementById("listItem");
+  const listItemValue = listItemInput.value.trim();
+
+  if (listItemValue) {
+    const listItem = document.createElement("li");
+    listItem.textContent = listItemValue;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "delete-btn";
+    deleteButton.onclick = () => listItem.remove();
+
+    listItem.appendChild(deleteButton);
+    document.getElementById("list").appendChild(listItem);
+    listItemInput.value = "";
+  }
+}

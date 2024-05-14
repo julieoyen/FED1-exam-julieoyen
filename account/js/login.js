@@ -20,7 +20,7 @@ document
           sessionStorage.setItem("authToken", data.data.accessToken);
           sessionStorage.setItem("userName", data.data.name);
           sessionStorage.setItem("userAvatar", data.data.avatar.url);
-          window.location.href = "/post/index.html";
+          window.location.href = "/index.html";
         } else {
           alert("Login failed: " + (data.message || "Unknown error"));
         }
@@ -29,3 +29,8 @@ document
         console.error("Error during login:", error);
       });
   });
+
+const registerBtn = document.getElementById("registerBTN");
+registerBtn.addEventListener("click", function () {
+  window.location.href = "/account/register.html";
+});

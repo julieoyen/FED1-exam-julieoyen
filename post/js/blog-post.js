@@ -15,22 +15,35 @@ fetch(blogPostApi)
     const post = data.data;
     const container = document.createElement("div");
 
+    // Assuming the body contains <ul> with <li> for ingredients and plain text for instructions
+    const ingredientsMatch = post.body.match(/<ul>[\s\S]*?<\/ul>/);
+    const ingredientsHTML = ingredientsMatch ? ingredientsMatch[0] : "";
+    const instructions = post.body.replace(ingredientsHTML, "").trim();
+
     container.innerHTML = `
-          <h2>${post.title}</h2>
-          ${
-            post.media
-              ? `<img src="${post.media.url}" alt="${post.media.alt}" class="postImg">`
-              : ""
-          }
-          <p>${post.body}</p>
-          ${
-            post.tags && post.tags.length
-              ? `<p>Tag: ${post.tags.join(", ")}</p>`
-              : ""
-          }
-          <p>Author: ${post.author.name}</p>
-          <p>Posted: ${post.created}</p>
-      `;
+      <h2>${post.title}</h2>
+      ${
+        post.media
+          ? `<img src="${post.media.url}" alt="${post.media.alt}" class="postImg">`
+          : ""
+      }
+      ${ingredientsHTML ? `<h3>Ingredients</h3>${ingredientsHTML}` : ""}
+      ${
+        instructions
+          ? `<h3>Instructions</h3><p>${instructions.replace(
+              /\n/g,
+              "</p><p>"
+            )}</p>`
+          : ""
+      }
+      ${
+        post.tags && post.tags.length
+          ? `<p>Tag: ${post.tags.join(", ")}</p>`
+          : ""
+      }
+      <p>Author: ${post.author.name}</p>
+      <p>Posted: ${new Date(post.created).toLocaleDateString()}</p>
+    `;
     postContent.appendChild(container);
   })
   .catch((error) => {

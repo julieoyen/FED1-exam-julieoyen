@@ -1,4 +1,43 @@
-#editPostContainer{
+h1 {
+    text-align: center;
+  }
+  
+  #editPostForm {
     display: flex;
     flex-direction: column;
-}
+    margin: 50px;
+  }
+  
+  #submitBTN {
+    margin: 5px 100px;
+    padding: 5px;
+  }
+  
+  input, textarea {
+    margin: 10px 0px;
+  }
+  
+  label {
+    margin-top: 5px;
+  }
+  
+  #list {
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+  
+  #list li {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+  

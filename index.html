@@ -16,10 +16,13 @@
     <title>Unprocessed food - live well</title>
   </head>
   <body>
-    <h1>
-      Eating unprocessed,
-      <h1>Eating Well</h1>
-    </h1>
+    <header>
+      <h1>
+        Eating unprocessed,
+        <br />
+        Eating Well
+      </h1>
+    </header>
     <div class="carousel">
       <div id="posts-container" class="carousel-slides"></div>
       <button class="carousel-control prev" onclick="moveSlide(-1)">
@@ -28,13 +31,25 @@
       <button class="carousel-control next" onclick="moveSlide(1)">
         &#10095;
       </button>
+      <div class="filter-container">
+        <select id="tag-filter" onchange="filterPostsByTag()">
+          <option value="all">All</option>
+        </select>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search posts..."
+          oninput="searchPosts()"
+        />
+      </div>
     </div>
     <div id="pagination-container" class="pagination-section">
-      <div id="posts-pagination" class="posts-pagination"></div>
+      <div id="posts-pagination" class="post-pagination"></div>
       <div class="pagination-controls">
         <button onclick="changePage(-1)">Prev</button>
         <button onclick="changePage(1)">Next</button>
       </div>
     </div>
+    <footer></footer>
   </body>
 </html>

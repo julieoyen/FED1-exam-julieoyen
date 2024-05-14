@@ -1,7 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+     }
 
-body{
-    width: 100%;
-}
 .carousel {
     position: relative;
     width: 100%;
@@ -28,11 +31,13 @@ body{
     color: #fff;
     font-size: 11px;
     border: none;
-    background:  rgba(106, 219, 151, 0.);
+    background:  rgba(106, 219, 151,);
     cursor: pointer;
     padding: 10px;
+    margin: 3px 10px;
     transform: translateY(-50%);
 }
+
 
 .prev {
     left: 10px;
@@ -43,7 +48,7 @@ body{
 }
 
 .carousel-slides img {
-    margin: 5px auto; 
+    margin: 10px 0pc; 
     max-width: 100px; 
     height: 100px;
     display: block;
@@ -74,6 +79,43 @@ h2{
   text-align: center;
 }
 
+
+
+#postPatination img{
+    align-items: center;
+}
+
+#pagination-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pagination-controls{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#tag-filter, #search-input {
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+footer{
+    background-color:rgba(106, 219, 151, 0.2);
+    margin-top: 40px;
+    padding: 50px;
+}
 @media only screen and (min-width: 768px) {
 
     .carousel-slides img {
@@ -113,5 +155,8 @@ h2{
       padding: 10px 20px; 
       font-size: 20px; 
       text-align: center;
+    }
+    .carousel-control:hover{
+        background-color: rgba(106, 219, 151, 0.9);
     }
 }

@@ -1,29 +1,37 @@
 const blogPage = "https://v2.api.noroff.dev/blog/posts/juliebertine/";
 const content = document.getElementById("posts-container");
 const paginationContent = document.getElementById("posts-pagination");
+const tagFilter = document.getElementById("tag-filter");
+const searchInput = document.getElementById("search-input");
+const carousel = document.querySelector(".carousel");
 let currentSlide = 0;
 let currentPage = 0;
 let allPosts = [];
-const postsPerPage = 4;
+const postsPerPage = 12;
 
 function append(data) {
   allPosts = data.data;
+  populateTags();
+  displayPosts(allPosts);
+}
+
+function displayPosts(posts) {
   content.innerHTML = "";
-  data.data.forEach((post, index) => {
+  posts.forEach((post, index) => {
     const container = document.createElement("div");
     container.classList.add("single-blog-post");
     container.innerHTML = `
     <div class="overlay">
-            <h2 id="carouselTitle">${post.title}</h2>
-            ${
-              post.media
-                ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}" ></a>`
-                : ""
-            } </div>
-        `;
+      <h2 id="carouselTitle">${post.title}</h2>
+      ${
+        post.media
+          ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}" ></a>`
+          : ""
+      }
+    </div>`;
     content.appendChild(container);
   });
-  displayPaginatedPosts(allPosts.slice(0, 12));
+  displayPaginatedPosts(posts);
 }
 
 function displayPaginatedPosts(posts) {
@@ -34,13 +42,13 @@ function displayPaginatedPosts(posts) {
     const postDiv = document.createElement("div");
     postDiv.classList.add("single-pagination-post");
     postDiv.innerHTML = `
-            <h3>${post.title}</h3>
-            ${
-              post.media
-                ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;"></a>`
-                : ""
-            }
-        `;
+      <h3>${post.title}</h3>
+      ${
+        post.media
+          ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;"></a>`
+          : ""
+      }
+    `;
     paginationContent.appendChild(postDiv);
   });
 }
@@ -56,7 +64,6 @@ function moveSlide(step) {
   }
 
   currentPage = Math.floor(currentSlide / 3);
-
   const newTransform = (-currentSlide * 100) / 3;
   content.style.transform = `translateX(${newTransform}%)`;
 }
@@ -71,6 +78,55 @@ function changePage(step) {
     currentPage = numberOfPages - 1;
   }
   displayPaginatedPosts(allPosts.slice(0, 12));
+}
+
+function populateTags() {
+  const tags = new Set();
+  allPosts.forEach((post) => {
+    if (post.tags) {
+      post.tags.forEach((tag) => {
+        if (tag.trim()) {
+          tags.add(tag);
+        }
+      });
+    }
+  });
+  tags.forEach((tag) => {
+    const option = document.createElement("option");
+    option.value = tag;
+    option.textContent = tag;
+    tagFilter.appendChild(option);
+  });
+}
+
+function filterPostsByTag() {
+  const selectedTag = tagFilter.value;
+  if (selectedTag === "all") {
+    displayPosts(allPosts);
+    carousel.style.display = "block";
+  } else {
+    const filteredPosts = allPosts.filter(
+      (post) => post.tags && post.tags.includes(selectedTag)
+    );
+    displayPosts(filteredPosts);
+    carousel.style.display = "none";
+  }
+}
+
+function searchPosts() {
+  const searchTerm = searchInput.value.toLowerCase();
+  if (searchTerm) {
+    const filteredPosts = allPosts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(searchTerm) ||
+        (post.content && post.content.toLowerCase().includes(searchTerm))
+    );
+    displayPosts(filteredPosts);
+    carousel.style.display = "none";
+  } else {
+    displayPosts(allPosts);
+    carousel.style.display = "block";
+  }
 }
 
 fetch(blogPage)

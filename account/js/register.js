@@ -82,3 +82,8 @@ function handleNetworkError(error) {
   console.error("Network Error:", error);
   alert("Registration failed due to network error!");
 }
+
+const loginBtn = document.getElementById("loginBTN");
+loginBtn.addEventListener("click", function () {
+  window.location.href = "/account/login.html";
+});

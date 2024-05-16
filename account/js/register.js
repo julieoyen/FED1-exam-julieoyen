@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const password = document.getElementById("password");
   const repeatPassword = document.getElementById("repeatPassword");
   const avatarURL = document.getElementById("avatar");
+  const errorMessage = document.getElementById("error-message");
 
   if (!form || !email || !username || !password || !repeatPassword) {
     console.error("Essential form elements are missing!");
@@ -14,6 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    if (!validateEmail(email)) {
+      return;
+    }
+
     if (!validatePasswords(password, repeatPassword)) {
       return;
     }
@@ -22,6 +27,15 @@ document.addEventListener("DOMContentLoaded", function () {
     submitRegistration(payload);
   });
 });
+
+function validateEmail(email) {
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/;
+  if (!emailPattern.test(email.value)) {
+    alert("Invalid email address. Must be @stud.noroff.no");
+    return false;
+  }
+  return true;
+}
 
 function validatePasswords(password, repeatPassword) {
   if (password.value.length < 8) {

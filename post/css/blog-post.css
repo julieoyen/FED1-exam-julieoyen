@@ -1,6 +1,21 @@
+body{
+  margin: 0;
+}
+
 .postImg {
     margin: 5px 50px; 
-    max-width: 500px; 
+    width: 100%; 
     height: auto;
+    
   } 
   
+  header{
+    font-family: 'Titan one', 'Times New Roman', Times, serif;
+    color: #278D2B ;
+    text-align: center;
+    background-color: rgba(110, 224, 156, 0.2);
+    padding-top: 40px;
+    padding-bottom: 15px;
+    font-size: larger;
+  }
+

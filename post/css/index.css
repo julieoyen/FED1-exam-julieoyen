@@ -26,6 +26,10 @@ object-fit: cover;
     display: flex;
     flex-direction: row;
     align-content: space-between;
+    padding: 5px 10px;
+    margin: 2px px;
+
+
 }
 
 div{

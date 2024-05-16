@@ -13,9 +13,11 @@ fetch(blogPostApi)
   .then((response) => response.json())
   .then((data) => {
     const post = data.data;
+
+    document.title = post.title;
+
     const container = document.createElement("div");
 
-    // Assuming the body contains <ul> with <li> for ingredients and plain text for instructions
     const ingredientsMatch = post.body.match(/<ul>[\s\S]*?<\/ul>/);
     const ingredientsHTML = ingredientsMatch ? ingredientsMatch[0] : "";
     const instructions = post.body.replace(ingredientsHTML, "").trim();

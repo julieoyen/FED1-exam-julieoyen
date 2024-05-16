@@ -1,17 +1,22 @@
+
 h1 {
     font-family: 'Titan One', sans-serif;
     color: #278D2B;
 }
 
 h2{
-    font-family: 'Julius Sans One';
+    font-family: 'Julius Sans One', 'Times New Roman', Times, serif;
 }
 
 h3{
-    font-family: 'Julius Sans One';
+    font-family: 'Julius Sans One', 'Times New Roman', Times, serif;
 }
 
-p{
+p, li{
+    font-family: 'nunito', 'Times New Roman', Times, serif;
+}
+
+button{
     font-family: 'nunito', 'Times New Roman', Times, serif;
 }
 
@@ -19,6 +24,7 @@ p{
 .loginPage{
     margin: 50px;
     padding: 50px;
+    max-width: 300px;
     border: #278D2B solid ;
 
 }
@@ -30,8 +36,18 @@ button{
     border-radius: 5px;
 }
 
-img{margin: 5px 100px; 
-    max-width: 350px; 
-    max-height: 350px;
-    object-fit: cover;
-    }
+.registerLogin button{
+background-color: white;
+color: #278D2B;
+font-weight: 700;
+cursor: pointer;
+}
+
+.registerLogin button:hover{
+    font-style: italic;
+}
+
+
+
+
+

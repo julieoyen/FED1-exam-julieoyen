@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/account/js/login.js" defer></script>
+    <meta name="theme-color" content="#d6f5e2" />
     <link rel="stylesheet" href="/account/css/login.css" />
     <link rel="stylesheet" href="/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,11 +23,10 @@
         <input type="email" id="email" name="email" required />
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required />
-        <button type="submit">LOGIN</button>
+        <button type="submit" class="submit">LOGIN</button>
       </form>
-      <div>
-        <p>Do you already have a user?</p>
-        <button id="registerBTN">Register now</button>
+      <div class="registerLogin">
+        <p>Don't have an account? <button id="registerBTN">SIGN UP</button></p>
       </div>
     </div>
   </body>

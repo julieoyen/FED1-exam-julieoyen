@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#d6f5e2" />
     <script src="index.js" defer></script>
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="styles.css" />
@@ -13,14 +14,14 @@
       href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Titan+One&display=swap"
       rel="stylesheet"
     />
-    <title>Unprocessed food - live well</title>
+    <title>Eating unprocessed - living well</title>
   </head>
   <body>
     <header>
       <h1>
         Eating unprocessed,
         <br />
-        Eating Well
+        Living well.
       </h1>
     </header>
     <div class="carousel">
@@ -31,17 +32,18 @@
       <button class="carousel-control next" onclick="moveSlide(1)">
         &#10095;
       </button>
-      <div class="filter-container">
-        <select id="tag-filter" onchange="filterPostsByTag()">
-          <option value="all">All</option>
-        </select>
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search posts..."
-          oninput="searchPosts()"
-        />
-      </div>
+    </div>
+    <div class="filter-container">
+      <select id="tag-filter" onchange="filterPostsByTag()">
+        <option value="all">View all tags</option>
+      </select>
+      <p>or</p>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search for a recipe"
+        oninput="searchPosts()"
+      />
     </div>
     <div id="pagination-container" class="pagination-section">
       <div id="posts-pagination" class="post-pagination"></div>

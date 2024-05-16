@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const postElement = document.createElement("div");
       postElement.innerHTML = `
               <h3>${post.title}</h3>
-              <p>${
+              <p class="indexImg">${
                 post.media
-                  ? `<img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;">`
+                  ? `<img src="${post.media.url}" alt="${post.media.alt}";">`
                   : ""
               }</p>
               <div class="buttons">

@@ -1,204 +1,104 @@
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
-  
-  .carousel {
+/* Base styles for mobile devices */
+.carousel {
     position: relative;
     width: 100%;
     overflow: hidden;
   }
-  
   .carousel-slides {
     display: flex;
     transition: transform 0.5s ease;
   }
-  
   .single-blog-post {
-    position: relative;
-    flex: 0 0 33.3333%;
     box-sizing: border-box;
-    padding: 20px;
-    background-color: rgba(106, 219, 151, 0.2);
+    padding: 10px;
+    min-width: 100%;
   }
-  
   .carousel-control {
     position: absolute;
     top: 50%;
-    z-index: 1000;
-    color: #fff;
-    font-size: 11px;
-    border: none;
-    background: rgba(106, 219, 151, 0.7);
-    cursor: pointer;
-    padding: 10px;
-    margin: 3px 10px;
     transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    z-index: 1;
   }
-  
-  .prev {
+  .carousel-control.prev {
     left: 10px;
   }
-  
-  .next {
+  .carousel-control.next {
     right: 10px;
   }
-  
-  .carousel-slides img {
-    margin: 10px 0px;
-    max-width: 100px;
-    height: 100px;
-    display: block;
-    width: 100%;
-    object-fit: cover;
-  }
-  
-  h1 {
-    margin-left: 15px;
-  }
-  
-  h2 {
-    font-size: 5px;
-    background-color: #fff;
-    padding: 13px 0px;
-    margin: 2px 10px;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-  }
-  
-  #carouselTitle {
-    position: absolute;
-    top: 80%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    color: black;
-    padding: 10px;
-    font-size: 10px;
-    text-align: center;
-  }
-  
-  .single-pagination-post {
+  .overlay {
     position: relative;
-    flex: 0 0 100%;
-    box-sizing: border-box;
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     text-align: center;
+    color: white;
   }
-  
-  .single-pagination-post h3 {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    margin: 0;
-    padding: 5px 10px;
-    background-color: rgba(255, 255, 255, 0.75);
-    color: #333;
-    font-size: 1rem;
-    max-width: calc(100% - 20px);
-    box-sizing: border-box;
-    z-index: 10;
-  }
-  
-  .single-pagination-post img {
-    display: block;
+  .single-blog-post img {
     width: 100%;
     height: auto;
   }
-  
-  #postPagination img {
-    align-items: center;
+  #carouselTitle {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
   }
-  
-  #pagination-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .pagination-controls {
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-  }
-  
   .filter-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 20px 0;
   }
-  
-  #tag-filter, #search-input {
-    margin: 0 10px;
+  #tag-filter {
     padding: 10px;
-    font-size: 16px;
+    margin-right: 10px;
   }
-  
-  footer {
-    background-color: rgba(106, 219, 151, 0.2);
-    margin-top: 40px;
-    padding: 50px;
+  #search-input {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
-  
-  img {
-    margin: 5px 100px;
-    max-width: 350px;
-    max-height: 350px;
-    object-fit: cover;
+  .pagination-section {
+    margin: 20px 0;
+    text-align: center;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .carousel-slides img {
-      margin: 5px auto;
-      max-width: 500px;
-      height: 500px;
-      display: block;
-      width: 100%;
+  .posts-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .single-pagination-post {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+  .pagination-controls button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    background-color: #278D2B;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  @media (min-width: 769px) {
+    .carousel .single-blog-post {
+      min-width: 33.33%;
     }
-  
-    h2 {
-      font-size: 13px;
-      background-color: #fff;
-      padding: 20px 0px;
-      margin: 2px 10px;
-      text-align: center;
+    .posts-grid .single-pagination-post {
+      flex: 1 1 20%;
     }
-  
-    .carousel-control {
-      position: absolute;
-      top: 50%;
-      z-index: 1000;
-      color: #fff;
-      font-size: 25px;
-      border: none;
-      background: rgba(0, 0, 0, 0.5);
-      cursor: pointer;
-      padding: 10px;
-      transform: translateY(-50%);
-    }
-  
-    #carouselTitle {
-      position: absolute;
-      top: 80%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      color: black;
-      padding: 10px 20px;
-      font-size: 20px;
-      text-align: center;
-    }
-  
-    .carousel-control:hover {
-      background-color: rgba(106, 219, 151, 0.9);
-    }
+    
   }
   

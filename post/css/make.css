@@ -1,44 +1,63 @@
 h1 {
-    text-align: center;
-  }
-  
-  #newPostForm {
-    display: flex;
-    flex-direction: column;
-    margin: 50px;
-  }
-  
-  #submitBTN {
-    margin: 5px 100px;
-    padding: 5px;
-  }
-  
-  input, textarea {
-    margin: 10px 0px;
-  }
-  
-  label {
-    margin-top: 5px;
-  }
-  
-  #list {
-    margin-top: 10px;
-    padding-left: 20px;
-  }
-  
-  #list li {
-    margin: 5px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .delete-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-  }
-  
-  
+  text-align: center;
+}
+
+#submitBTN {
+  margin: 20px 0;
+  padding: 10px;
+  align-self: center;
+  background-color: #278D2B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#submitBTN:hover {
+  background-color: #1E6B1A;
+}
+
+input, textarea {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+textarea {
+  height: 200px;
+  resize: vertical;
+}
+
+label {
+  margin-top: 5px;
+}
+
+#list {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+#list li {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  display: none;
+}

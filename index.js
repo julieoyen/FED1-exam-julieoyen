@@ -9,48 +9,64 @@ let currentPage = 0;
 let allPosts = [];
 const postsPerPage = 12;
 
-function append(data) {
-  allPosts = data.data;
+async function fetchPosts() {
+  try {
+    const response = await fetch(blogPage);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    allPosts = data.data;
+    append();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    content.innerHTML =
+      "<p>Error fetching the blog posts. Please try again later.</p>";
+  }
+}
+
+function append() {
   populateTags();
   displayPosts(allPosts);
 }
 
-function displayPosts(posts) {
-  content.innerHTML = "";
-  posts.forEach((post, index) => {
-    const container = document.createElement("div");
-    container.classList.add("single-blog-post");
-    container.innerHTML = `
+function createPostHTML(post) {
+  return `
     <div class="overlay">
       <h2 id="carouselTitle">${post.title}</h2>
       ${
         post.media
-          ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}" ></a>`
+          ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
           : ""
       }
     </div>`;
-    content.appendChild(container);
+}
+
+function displayPosts(posts) {
+  content.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+  posts.forEach((post) => {
+    const container = document.createElement("div");
+    container.classList.add("single-blog-post");
+    container.innerHTML = createPostHTML(post);
+    fragment.appendChild(container);
   });
+  content.appendChild(fragment);
   displayPaginatedPosts(posts);
 }
 
 function displayPaginatedPosts(posts) {
   paginationContent.innerHTML = "";
+  const fragment = document.createDocumentFragment();
   const startIndex = currentPage * postsPerPage;
-  const endIndex = startIndex + postsPerPage;
+  const endIndex = Math.min(startIndex + postsPerPage, posts.length);
   posts.slice(startIndex, endIndex).forEach((post) => {
     const postDiv = document.createElement("div");
     postDiv.classList.add("single-pagination-post");
-    postDiv.innerHTML = `
-      <h3>${post.title}</h3>
-      ${
-        post.media
-          ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}" style="width:100%;"></a>`
-          : ""
-      }
-    `;
-    paginationContent.appendChild(postDiv);
+    postDiv.innerHTML = createPostHTML(post);
+    fragment.appendChild(postDiv);
   });
+  paginationContent.appendChild(fragment);
 }
 
 function moveSlide(step) {
@@ -69,15 +85,9 @@ function moveSlide(step) {
 }
 
 function changePage(step) {
-  const totalPosts = Math.min(12, allPosts.length);
-  const numberOfPages = Math.ceil(totalPosts / postsPerPage);
-  currentPage += step;
-  if (currentPage < 0) {
-    currentPage = 0;
-  } else if (currentPage >= numberOfPages) {
-    currentPage = numberOfPages - 1;
-  }
-  displayPaginatedPosts(allPosts.slice(0, 12));
+  const numberOfPages = Math.ceil(allPosts.length / postsPerPage);
+  currentPage = Math.max(0, Math.min(currentPage + step, numberOfPages - 1));
+  displayPaginatedPosts(allPosts);
 }
 
 function populateTags() {
@@ -101,39 +111,25 @@ function populateTags() {
 
 function filterPostsByTag() {
   const selectedTag = tagFilter.value;
-  if (selectedTag === "all") {
-    displayPosts(allPosts);
-    carousel.style.display = "block";
-  } else {
-    const filteredPosts = allPosts.filter(
-      (post) => post.tags && post.tags.includes(selectedTag)
-    );
-    displayPosts(filteredPosts);
-    carousel.style.display = "none";
-  }
+  const filteredPosts =
+    selectedTag === "all"
+      ? allPosts
+      : allPosts.filter((post) => post.tags && post.tags.includes(selectedTag));
+  displayPosts(filteredPosts);
+  carousel.style.display = selectedTag === "all" ? "block" : "none";
 }
 
 function searchPosts() {
   const searchTerm = searchInput.value.toLowerCase();
-  if (searchTerm) {
-    const filteredPosts = allPosts.filter(
-      (post) =>
-        post.title.toLowerCase().includes(searchTerm) ||
-        (post.content && post.content.toLowerCase().includes(searchTerm))
-    );
-    displayPosts(filteredPosts);
-    carousel.style.display = "none";
-  } else {
-    displayPosts(allPosts);
-    carousel.style.display = "block";
-  }
+  const filteredPosts = searchTerm
+    ? allPosts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(searchTerm) ||
+          (post.content && post.content.toLowerCase().includes(searchTerm))
+      )
+    : allPosts;
+  displayPosts(filteredPosts);
+  carousel.style.display = searchTerm ? "none" : "block";
 }
 
-fetch(blogPage)
-  .then((response) => response.json())
-  .then((data) => append(data))
-  .catch((error) => {
-    console.error("Error fetching data:", error);
-    content.innerHTML =
-      "<p>Error fetching the blog posts. Please try again later.</p>";
-  });
+fetchPosts();

@@ -19,3 +19,8 @@ body{
     font-size: larger;
   }
 
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  

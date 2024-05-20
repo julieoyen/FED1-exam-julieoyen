@@ -1,18 +1,35 @@
-function getUrlParameter(name) {
-  const regex = new RegExp(`[?&]${name.replace(/[[\]]/g, "\\$&")}=([^&#]*)`);
-  const results = regex.exec(window.location.search);
-  return results ? decodeURIComponent(results[1].replace(/\+/g, " ")) : "";
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const postId = getUrlParameter("ID");
+  const blogPostApi = `https://v2.api.noroff.dev/blog/posts/juliebertine/${postId}`;
+  const postContent = document.getElementById("post-content");
 
-const postId = getUrlParameter("ID");
-const blogPostApi = `https://v2.api.noroff.dev/blog/posts/juliebertine/${postId}`;
+  async function fetchBlogPost() {
+    try {
+      const response = await fetch(blogPostApi);
+      if (!response.ok) {
+        throw new Error("Failed to fetch blog post");
+      }
+      const data = await response.json();
+      displayBlogPost(data.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      postContent.innerHTML =
+        "<p class='error'>Error fetching the blog post. Please try again later.</p>";
+    }
+  }
 
-const postContent = document.getElementById("post-content");
+  function getUrlParameter(name) {
+    const regex = new RegExp(`[?&]${name.replace(/[[\]]/g, "\\$&")}=([^&#]*)`);
+    const results = regex.exec(window.location.search);
+    return results ? decodeURIComponent(results[1].replace(/\+/g, " ")) : "";
+  }
 
-fetch(blogPostApi)
-  .then((response) => response.json())
-  .then((data) => {
-    const post = data.data;
+  function displayBlogPost(post) {
+    if (!post || !post.title || !post.body || !post.author) {
+      postContent.innerHTML =
+        "<p class='error'>Incomplete post data. Please try again later.</p>";
+      return;
+    }
 
     document.title = post.title;
 
@@ -47,9 +64,7 @@ fetch(blogPostApi)
       <p>Posted: ${new Date(post.created).toLocaleDateString()}</p>
     `;
     postContent.appendChild(container);
-  })
-  .catch((error) => {
-    console.error("Error fetching data:", error);
-    postContent.innerHTML =
-      "<p>Error fetching the blog post. Please try again later.</p>";
-  });
+  }
+
+  fetchBlogPost();
+});

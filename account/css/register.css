@@ -1,44 +1,50 @@
-
-
-body{
+body {
   text-align: center;
 }
-h1{
-    text-align: center;
+
+h1 {
+  text-align: center;
 }
 
-form, button{
-    font-family: 'nunito';
+form, button {
+  font-family: 'nunito';
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    margin: 5px auto; 
-    max-width: 300px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  margin: 5px auto; 
+  max-width: 300px; 
+}
 
-  }
-  
-  button {
-    margin: 20px 0px;
-    padding: 5px 15px;
-    background-color: #278D2B;
-    color: white;
-    box-shadow: none; 
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  
-  label {
-    text-align: left;
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  input {
-    width: 100%; 
-  }
-  
+button {
+  margin: 20px 0px;
+  padding: 5px 15px;
+  background-color: #278D2B;
+  color: white;
+  box-shadow: none; 
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+label {
+  text-align: left;
+  width: 100%;
+  margin-top: 20px;
+}
+
+input {
+  width: 100%; 
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.field-error {
+  color: red;
+  display: none;
+}

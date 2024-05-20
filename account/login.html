@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/account/js/login.js" defer></script>
-    <meta name="theme-color" content="#d6f5e2" />
     <link rel="stylesheet" href="/account/css/login.css" />
     <link rel="stylesheet" href="/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,10 +18,16 @@
     <div class="loginPage">
       <h1>Login</h1>
       <form id="loginForm">
+        <div id="error-message" class="error-message"></div>
+
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required />
+        <span id="email-error" class="field-error"></span>
+
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required />
+        <span id="password-error" class="field-error"></span>
+
         <button type="submit" class="submit">LOGIN</button>
       </form>
       <div class="registerLogin">

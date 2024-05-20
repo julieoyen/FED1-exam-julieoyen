@@ -52,6 +52,7 @@ body {
     height: 100px;
     display: block;
     width: 100%;
+    object-fit: cover;
   }
   
   h1 {
@@ -84,11 +85,17 @@ body {
     position: relative;
     flex: 0 0 100%;
     box-sizing: border-box;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   
   .single-pagination-post h3 {
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     left: 10px;
     margin: 0;
     padding: 5px 10px;
@@ -141,11 +148,13 @@ body {
     padding: 50px;
   }
   
-  img{margin: 5px 100px; 
-    max-width: 350px; 
+  img {
+    margin: 5px 100px;
+    max-width: 350px;
     max-height: 350px;
     object-fit: cover;
-    }
+  }
+  
   @media only screen and (min-width: 768px) {
     .carousel-slides img {
       margin: 5px auto;
@@ -191,31 +200,5 @@ body {
     .carousel-control:hover {
       background-color: rgba(106, 219, 151, 0.9);
     }
-  }
-  
-  .single-pagination-post {
-    position: relative;
-    flex: 0 0 100%;
-    box-sizing: border-box;
-  }
-  
-  .single-pagination-post h3 {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    margin: 0;
-    padding: 5px 10px;
-    background-color: rgba(255, 255, 255, 0.75);
-    color: #333;
-    font-size: 1rem;
-    max-width: calc(100% - 20px);
-    box-sizing: border-box;
-    z-index: 10;
-  }
-  
-  .single-pagination-post img {
-    display: block;
-    width: 100%;
-    height: auto;
   }
   

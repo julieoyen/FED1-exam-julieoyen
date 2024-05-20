@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/account/js/register.js" defer></script>
-    <meta name="theme-color" content="#d6f5e2"/>
     <link rel="stylesheet" href="/account/css/register.css" />
     <link rel="stylesheet" href="/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,6 +18,8 @@
     <div class="registerPage">
       <h1>Register</h1>
       <form id="registerForm">
+        <div id="error-message" class="error-message"></div>
+
         <label for="email">Email:</label>
         <input
           type="email"
@@ -27,6 +28,7 @@
           placeholder="email@stud.noroff.no"
           required
         />
+        <span id="email-error" class="field-error"></span>
 
         <label for="username">Username:</label>
         <input
@@ -36,6 +38,7 @@
           placeholder="required"
           required
         />
+        <span id="username-error" class="field-error"></span>
 
         <label for="password">Password:</label>
         <input
@@ -46,6 +49,7 @@
           required
           minlength="8"
         />
+        <span id="password-error" class="field-error"></span>
 
         <label for="repeatPassword">Repeat password:</label>
         <input
@@ -56,16 +60,17 @@
           required
           minlength="8"
         />
+        <span id="repeatPassword-error" class="field-error"></span>
 
         <label for="avatar">Avatar URL:</label>
         <input type="text" id="avatar" name="avatar" placeholder="optional" />
+        <span id="avatar-error" class="field-error"></span>
 
         <button type="submit" class="submit">REGISTER</button>
       </form>
       <div class="registerLogin">
-      <p>Already have an account?
-      <button id="loginBTN">LOG IN</button></p>
+        <p>Already have an account? <button id="loginBTN">LOG IN</button></p>
+      </div>
     </div>
   </body>
-
 </html>

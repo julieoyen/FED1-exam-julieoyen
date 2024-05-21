@@ -1,6 +1,7 @@
+
 h1 {
     font-family: 'Titan One', sans-serif;
-    color: #278D2B;
+    color: #62AC66;
   }
   
   h2 {
@@ -15,10 +16,9 @@ h1 {
     font-family: 'nunito', 'Times New Roman', Times, serif;
   }
   
-  button {
+  textarea{
     font-family: 'nunito', 'Times New Roman', Times, serif;
   }
-  
   .registerPage,
   .loginPage {
     margin: 50px;
@@ -28,12 +28,25 @@ h1 {
   }
   
   button {
-    background-color: #278D2B;
+    font-family: 'nunito', 'Times New Roman', Times, serif;
+    background-color: #62AC66;
     color: white;
     border-style: none;
     border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background-color: #1E6B1A;
   }
   
+  #submitBTN {
+    margin: 20px 0;
+    padding: 5px 20px;
+  
+  }
+
   .registerLogin button {
     background-color: white;
     color: #278D2B;
@@ -54,5 +67,24 @@ h1 {
     flex-direction: column;
     margin: 50px;
     max-width: 800px;
+  }
+  
+  .delete-btn {
+    background-color: #E06666;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .delete-btn:hover{
+    background-color: #D73C3C;
+  }
+
+  #error-message, .error, .field-error {
+    color: red;
+    font-weight: bold;
+    display: none;
   }
   

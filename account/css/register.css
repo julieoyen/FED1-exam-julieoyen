@@ -38,13 +38,3 @@ label {
 input {
   width: 100%; 
 }
-
-.error-message {
-  color: red;
-  margin-bottom: 10px;
-}
-
-.field-error {
-  color: red;
-  display: none;
-}

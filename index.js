@@ -22,7 +22,7 @@ async function fetchPosts() {
     }
     const data = await response.json();
     allPosts = data.data;
-    append();
+    init();
   } catch (error) {
     console.error("Error fetching data:", error);
     content.innerHTML =
@@ -30,20 +30,19 @@ async function fetchPosts() {
   }
 }
 
-function append() {
+function init() {
   populateTags();
   displayPosts(allPosts);
+  window.addEventListener("resize", () => displayPosts(allPosts));
+  tagFilter.addEventListener("change", filterPostsByTag);
+  searchInput.addEventListener("input", searchPosts);
 }
 
 function createPostHTML(post) {
   return `
     <div class="overlay">
       <h2 id="carouselTitle">${post.title}</h2>
-      ${
-        post.media
-          ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}" loading="lazy"></a>`
-          : ""
-      }
+      ${post.media ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>` : ""}
     </div>`;
 }
 
@@ -55,26 +54,18 @@ function displayPosts(posts) {
   const latestPosts = posts.slice(0, totalSlides);
   const fragment = document.createDocumentFragment();
 
-  // Create duplicates of the last and first slides for seamless looping
-  const lastSlide = document.createElement("div");
-  lastSlide.classList.add("single-blog-post");
-  lastSlide.innerHTML = createPostHTML(latestPosts[latestPosts.length - 1]);
-  fragment.appendChild(lastSlide);
+  const slides = [...latestPosts, latestPosts[0]];
+  slides.unshift(latestPosts[latestPosts.length - 1]);
 
-  latestPosts.forEach((post) => {
+  slides.forEach(post => {
     const container = document.createElement("div");
     container.classList.add("single-blog-post");
     container.innerHTML = createPostHTML(post);
     fragment.appendChild(container);
   });
 
-  const firstSlide = document.createElement("div");
-  firstSlide.classList.add("single-blog-post");
-  firstSlide.innerHTML = createPostHTML(latestPosts[0]);
-  fragment.appendChild(firstSlide);
-
   content.appendChild(fragment);
-  content.style.transform = `translateX(-${100 / slidesToShow}%)`; // Move to the first actual slide
+  content.style.transform = `translateX(-${100 / slidesToShow}%)`;
   displayPaginatedPosts(posts);
 }
 
@@ -83,7 +74,7 @@ function displayPaginatedPosts(posts) {
   const fragment = document.createDocumentFragment();
   const startIndex = currentPage * postsPerPage;
   const endIndex = Math.min(startIndex + postsPerPage, posts.length);
-  posts.slice(startIndex, endIndex).forEach((post) => {
+  posts.slice(startIndex, endIndex).forEach(post => {
     const postDiv = document.createElement("div");
     postDiv.classList.add("single-pagination-post");
     postDiv.innerHTML = createPostHTML(post);
@@ -105,26 +96,18 @@ function moveSlide(step) {
   content.style.transition = "transform 0.5s ease";
   content.style.transform = `translateX(${newTransform}%)`;
 
-  content.addEventListener(
-    "transitionend",
-    () => {
-      if (currentSlide === 0) {
-        currentSlide = slides.length - 2;
-        content.style.transition = "none";
-        content.style.transform = `translateX(${
-          -currentSlide * (100 / slidesToShow)
-        }%)`;
-      } else if (currentSlide === slides.length - 1) {
-        currentSlide = 1;
-        content.style.transition = "none";
-        content.style.transform = `translateX(${
-          -currentSlide * (100 / slidesToShow)
-        }%)`;
-      }
-      isTransitioning = false;
-    },
-    { once: true }
-  );
+  content.addEventListener("transitionend", () => {
+    if (currentSlide === 0) {
+      currentSlide = slides.length - 2;
+      content.style.transition = "none";
+      content.style.transform = `translateX(${-currentSlide * (100 / slidesToShow)}%)`;
+    } else if (currentSlide === slides.length - 1) {
+      currentSlide = 1;
+      content.style.transition = "none";
+      content.style.transform = `translateX(${-currentSlide * (100 / slidesToShow)}%)`;
+    }
+    isTransitioning = false;
+  }, { once: true });
 }
 
 function changePage(step) {
@@ -135,16 +118,17 @@ function changePage(step) {
 
 function populateTags() {
   const tags = new Set();
-  allPosts.forEach((post) => {
+  allPosts.forEach(post => {
     if (post.tags) {
-      post.tags.forEach((tag) => {
+      post.tags.forEach(tag => {
         if (tag.trim()) {
           tags.add(tag);
         }
       });
     }
   });
-  tags.forEach((tag) => {
+  tagFilter.innerHTML = '<option value="all">All</option>';
+  tags.forEach(tag => {
     const option = document.createElement("option");
     option.value = tag;
     option.textContent = tag;
@@ -154,27 +138,16 @@ function populateTags() {
 
 function filterPostsByTag() {
   const selectedTag = tagFilter.value;
-  const filteredPosts =
-    selectedTag === "all"
-      ? allPosts
-      : allPosts.filter((post) => post.tags && post.tags.includes(selectedTag));
+  const filteredPosts = selectedTag === "all" ? allPosts : allPosts.filter(post => post.tags && post.tags.includes(selectedTag));
   displayPosts(filteredPosts);
   carousel.style.display = selectedTag === "all" ? "block" : "none";
 }
 
 function searchPosts() {
   const searchTerm = searchInput.value.toLowerCase();
-  const filteredPosts = searchTerm
-    ? allPosts.filter(
-        (post) =>
-          post.title.toLowerCase().includes(searchTerm) ||
-          (post.content && post.content.toLowerCase().includes(searchTerm))
-      )
-    : allPosts;
+  const filteredPosts = searchTerm ? allPosts.filter(post => post.title.toLowerCase().includes(searchTerm) || (post.content && post.content.toLowerCase().includes(searchTerm))) : allPosts;
   displayPosts(filteredPosts);
   carousel.style.display = searchTerm ? "none" : "block";
 }
-
-window.addEventListener("resize", () => displayPosts(allPosts)); // Adjust carousel on resize
 
 fetchPosts();

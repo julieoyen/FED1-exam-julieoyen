@@ -1,20 +1,29 @@
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+
 h1 {
   text-align: center;
 }
 
-#submitBTN {
-  margin: 20px 0;
-  padding: 10px;
-  align-self: center;
-  background-color: #278D2B;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#submitBTN:hover {
-  background-color: #1E6B1A;
+label {
+  align-self: flex-start;
+  margin-top: 5px;
 }
 
 input, textarea {
@@ -31,13 +40,11 @@ textarea {
   resize: vertical;
 }
 
-label {
-  margin-top: 5px;
-}
 
 #list {
   margin-top: 10px;
   padding-left: 20px;
+  width: 100%;
 }
 
 #list li {
@@ -47,17 +54,3 @@ label {
   align-items: center;
 }
 
-.delete-btn {
-  background-color: red;
-  color: white;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.error-message {
-  color: red;
-  font-weight: bold;
-  display: none;
-}

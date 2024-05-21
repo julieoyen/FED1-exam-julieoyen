@@ -2,25 +2,28 @@ body{
   margin: 0;
 }
 
-.postImg {
-    margin: 5px 50px; 
-    width: 100%; 
-    height: auto;
-    
-  } 
+
   
   header{
     font-family: 'Titan one', 'Times New Roman', Times, serif;
-    color: #278D2B ;
+    color: #62AC66 ;
     text-align: center;
-    background-color: rgba(110, 224, 156, 0.2);
+    background-color: #E6F9ED;
     padding-top: 40px;
     padding-bottom: 15px;
     font-size: larger;
   }
 
-  .error {
-    color: red;
-    font-weight: bold;
+  a{
+    text-decoration: none;
   }
-  
+
+#post-content {
+  margin: 20px;
+}
+
+#post-content img{
+  width: 100%;
+  max-height: auto;
+}
+

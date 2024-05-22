@@ -27,3 +27,23 @@ body{
   max-height: auto;
 }
 
+h3{
+  align-items: center;
+  text-align: center;
+}
+
+
+
+@media (min-width: 769px) {
+  #post-content img{
+    max-height: 650px;
+    max-width: 650px;
+    object-fit: cover;
+  }
+
+  #post-content{
+    margin: 40px 100px;
+    padding: 50px 100px;
+  }
+
+}

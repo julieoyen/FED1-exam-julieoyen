@@ -17,9 +17,14 @@
   <body>
     <h1>Welcome, <span id="username">Username</span>!</h1>
     <div class="message">
-      <h2>Would you like to edit, delete or make a</h2>
-      <button onclick="window.location.href='make.html'">New Post</button>
+      <h3>Would you like to edit, delete or make a</h3>
+      <button
+        onclick="window.location.href='make.html'"
+        aria-label="Create New Post"
+      >
+        New Post
+      </button>
     </div>
-    <div id="postsContainer"></div>
+    <div id="postsContainer" role="list" aria-label="Blog Posts"></div>
   </body>
 </html>

@@ -25,7 +25,7 @@
         <input type="text" id="listItem" />
         <button type="button" onclick="addListItem()">Add to List</button>
 
-        <ul id="list"></ul>
+        <ul id="list" role="list" aria-label="Ingredients list"></ul>
 
         <label for="body">Body:</label>
         <textarea id="body" name="body"></textarea>
@@ -41,6 +41,7 @@
 
         <button id="submitBTN" type="submit">Save Changes</button>
       </form>
+      <div id="notification" aria-live="polite" aria-atomic="true"></div>
     </div>
   </body>
 </html>

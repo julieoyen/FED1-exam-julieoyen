@@ -42,15 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     posts.forEach((post) => {
       const postElement = document.createElement("div");
+      postElement.classList.add("post");
       postElement.innerHTML = `
-        <h3>${post.title}</h3>
-        <p class="indexImg">
+        <div>
+          <h3>${post.title}</h3>
           ${
             post.media
-              ? `<img src="${post.media.url}" alt="${post.media.alt}">`
+              ? `<a target="_blank" href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
               : ""
           }
-        </p>
+        </div>
         <div class="buttons">
           <button class="edit-btn" data-id="${post.id}">Edit</button>
           <button class="delete-btn" data-id="${post.id}">Delete</button>

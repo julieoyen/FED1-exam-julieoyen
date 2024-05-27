@@ -1,20 +1,15 @@
-// Define constants for DOM elements and initial settings
 const blogPage = "https://v2.api.noroff.dev/blog/posts/juliebertine/";
 const content = document.getElementById("posts-container");
 const paginationContent = document.getElementById("posts-pagination");
 const tagFilter = document.getElementById("tag-filter");
 const searchInput = document.getElementById("search-input");
 const carousel = document.querySelector(".carousel");
-const loadingIndicator = document.getElementById("loading-indicator");
-
 let currentSlide = 0;
 let currentPage = 0;
 let allPosts = [];
 const postsPerPage = 12;
-const desktopSlidesToShow = 3;
 let isTransitioning = false;
 
-// Fetch posts from the API and initialize the application
 async function fetchPosts() {
   try {
     const response = await fetch(blogPage);
@@ -26,56 +21,72 @@ async function fetchPosts() {
     console.error("Error fetching data:", error);
     content.innerHTML =
       "<p>Error fetching the blog posts. Please try again later.</p>";
-  } finally {
-    loadingIndicator.style.display = "none";
   }
 }
 
-// Initialize the application
 function init() {
   populateTags();
-  displayPosts(allPosts);
-  window.addEventListener("resize", () => displayPosts(allPosts));
-  tagFilter.addEventListener("change", filterPostsByTag);
-  searchInput.addEventListener("input", searchPosts);
+  displayPaginatedPosts(allPosts);
+  window.addEventListener("resize", renderCarousel);
+  attachEventListeners();
+  renderCarousel();
 }
 
-// Create HTML for a single post
 function createPostHTML(post) {
   return `
-    <div class="overlay">
-      <h2 id="carouselTitle">${post.title}</h2>
-      ${
-        post.media
-          ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
-          : ""
-      }
-    </div>`;
+        <div class="single-blog-post">
+            <div class="overlay">
+                <a href="/post/blog-post.html?ID=${post.id}">
+                    <h3 id="carouselTitle">${post.title}</h3>
+                </a>
+                ${
+                  post.media
+                    ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
+                    : ""
+                }
+            </div>
+        </div>`;
 }
 
-// Display posts and set up the carousel
-function displayPosts(posts) {
-  content.innerHTML = "";
-  const isMobile = window.innerWidth < 769;
-  const slidesToShow = isMobile ? 1 : desktopSlidesToShow;
-  const latestPosts = posts.slice(0, 5); // Last 5 posts for desktop
+function renderCarousel() {
   const fragment = document.createDocumentFragment();
-
-  const slides = [...latestPosts, ...latestPosts, ...latestPosts]; // Repeat posts for infinite effect
-
-  slides.forEach((post) => {
+  const postsToShow = allPosts.slice(0, 3); // Only show the three newest posts
+  postsToShow.forEach((post, index) => {
     const container = document.createElement("div");
-    container.classList.add("single-blog-post");
+    container.classList.add("carousel-item-container");
+    if (index === 0) container.classList.add("active");
     container.innerHTML = createPostHTML(post);
     fragment.appendChild(container);
   });
-
+  content.innerHTML = "";
   content.appendChild(fragment);
-  content.style.transform = `translateX(-${100 / slidesToShow}%)`;
-  displayPaginatedPosts(posts);
+  updateNavigation();
+  centerCarousel(); // Ensure the carousel is centered
 }
 
-// Display paginated posts
+function moveSlide(step) {
+  if (isTransitioning) return;
+  isTransitioning = true;
+  const slides = document.querySelectorAll(".carousel-item-container");
+  const totalSlides = slides.length;
+
+  slides.forEach((slide) => slide.classList.remove("active"));
+
+  currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+  slides[currentSlide].classList.add("active");
+
+  setTimeout(() => {
+    isTransitioning = false;
+  }, 1000); // Duration of the CSS transition
+}
+
+function updateNavigation() {
+  const prevButton = document.querySelector(".carousel-control.prev");
+  const nextButton = document.querySelector(".carousel-control.next");
+  prevButton.addEventListener("click", () => moveSlide(-1));
+  nextButton.addEventListener("click", () => moveSlide(1));
+}
+
 function displayPaginatedPosts(posts) {
   paginationContent.innerHTML = "";
   const fragment = document.createDocumentFragment();
@@ -90,62 +101,21 @@ function displayPaginatedPosts(posts) {
   paginationContent.appendChild(fragment);
 }
 
-// Move the carousel slide
-function moveSlide(step) {
-  if (isTransitioning) return;
-  isTransitioning = true;
-
-  const isMobile = window.innerWidth < 769;
-  const slidesToShow = isMobile ? 1 : desktopSlidesToShow;
-  const slides = document.querySelectorAll(".single-blog-post");
-  currentSlide += step;
-
-  const newTransform = -currentSlide * (100 / slidesToShow);
-  content.style.transition = "transform 0.5s ease";
-  content.style.transform = `translateX(${newTransform}%)`;
-
-  function onTransitionEnd() {
-    content.removeEventListener("transitionend", onTransitionEnd);
-
-    if (currentSlide < 0) {
-      currentSlide = slides.length / 3 - 1;
-      content.style.transition = "none";
-      content.style.transform = `translateX(${
-        -currentSlide * (100 / slidesToShow)
-      }%)`;
-    } else if (currentSlide >= slides.length / 3) {
-      currentSlide = 0;
-      content.style.transition = "none";
-      content.style.transform = `translateX(${
-        -currentSlide * (100 / slidesToShow)
-      }%)`;
-    }
-    isTransitioning = false;
-  }
-
-  content.addEventListener("transitionend", onTransitionEnd);
-}
-
-// Change the pagination page
 function changePage(step) {
   const numberOfPages = Math.ceil(allPosts.length / postsPerPage);
   currentPage = Math.max(0, Math.min(currentPage + step, numberOfPages - 1));
   displayPaginatedPosts(allPosts);
 }
 
-// Populate the tag filter options
 function populateTags() {
   const tags = new Set();
   allPosts.forEach((post) => {
-    if (post.tags) {
+    if (post.tags)
       post.tags.forEach((tag) => {
-        if (tag.trim()) {
-          tags.add(tag);
-        }
+        if (tag.trim()) tags.add(tag);
       });
-    }
   });
-  tagFilter.innerHTML = '<option value="all">All</option>';
+  tagFilter.innerHTML = '<option value="all">View all tags</option>';
   tags.forEach((tag) => {
     const option = document.createElement("option");
     option.value = tag;
@@ -154,18 +124,21 @@ function populateTags() {
   });
 }
 
-// Filter posts by the selected tag
 function filterPostsByTag() {
   const selectedTag = tagFilter.value;
   const filteredPosts =
     selectedTag === "all"
       ? allPosts
       : allPosts.filter((post) => post.tags && post.tags.includes(selectedTag));
-  displayPosts(filteredPosts);
-  carousel.style.display = selectedTag === "all" ? "block" : "none";
+  displayPaginatedPosts(filteredPosts);
+  if (selectedTag === "all") {
+    carousel.style.display = "block"; // Show the carousel
+    renderCarousel();
+  } else {
+    carousel.style.display = "none"; // Hide the carousel
+  }
 }
 
-// Filter posts by the search input
 function searchPosts() {
   const searchTerm = searchInput.value.toLowerCase();
   const filteredPosts = searchTerm
@@ -175,9 +148,26 @@ function searchPosts() {
           (post.content && post.content.toLowerCase().includes(searchTerm))
       )
     : allPosts;
-  displayPosts(filteredPosts);
-  carousel.style.display = searchTerm ? "none" : "block";
+  displayPaginatedPosts(filteredPosts);
+  if (searchTerm) {
+    carousel.style.display = "none"; // Hide the carousel
+  } else {
+    carousel.style.display = "block"; // Show the carousel
+    renderCarousel();
+  }
 }
 
-// Fetch posts on load
+function attachEventListeners() {
+  tagFilter.addEventListener("change", filterPostsByTag);
+  searchInput.addEventListener("input", searchPosts);
+}
+
+function centerCarousel() {
+  // Ensure the carousel is centered
+  const slides = document.querySelectorAll(".carousel-item-container");
+  if (slides.length > 0) {
+    slides[0].parentNode.style.justifyContent = "center";
+  }
+}
+
 fetchPosts();

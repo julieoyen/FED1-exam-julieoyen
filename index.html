@@ -23,34 +23,54 @@
         Living well.
       </h1>
     </header>
-    <div class="carousel">
-      <div id="posts-container" class="carousel-slides"></div>
-      <button class="carousel-control prev" onclick="moveSlide(-1)">
-        &#10094;
-      </button>
-      <button class="carousel-control next" onclick="moveSlide(1)">
-        &#10095;
-      </button>
-    </div>
-    <div class="filter-container">
-      <select id="tag-filter" onchange="filterPostsByTag()">
-        <option value="all">View all tags</option>
-      </select>
-      <p>or</p>
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Search for a recipe"
-        oninput="searchPosts()"
-      />
-    </div>
-    <div id="pagination-container" class="pagination-section">
-      <div id="posts-pagination" class="posts-grid"></div>
-      <div class="pagination-controls">
-        <button onclick="changePage(-1)">Prev</button>
-        <button onclick="changePage(1)">Next</button>
+    <main>
+      <div class="carousel" aria-label="Featured Posts Carousel">
+        <h2 id="latest-recipes">latest recipes</h2>
+        <div
+          id="posts-container"
+          class="carousel-slides"
+          role="region"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
+        <button class="carousel-control prev" aria-label="Previous Slide">
+          &#10094;
+        </button>
+        <button class="carousel-control next" aria-label="Next Slide">
+          &#10095;
+        </button>
       </div>
-    </div>
+      <div class="filter-container">
+        <label for="tag-filter" class="visually-hidden">Filter by tag</label>
+        <select id="tag-filter" aria-label="Filter posts by tag">
+          <option value="all">View all tags</option>
+        </select>
+        <p>or</p>
+        <label for="search-input" class="visually-hidden"
+          >Search for a recipe</label
+        >
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search for a recipe"
+          aria-label="Search for a recipe"
+        />
+      </div>
+      <div
+        id="pagination-container"
+        class="pagination-section"
+        role="navigation"
+        aria-label="Pagination"
+      >
+        <div id="posts-pagination" class="posts-grid"></div>
+        <div class="pagination-controls">
+          <button onclick="changePage(-1)" aria-label="Previous Page">
+            Prev
+          </button>
+          <button onclick="changePage(1)" aria-label="Next Page">Next</button>
+        </div>
+      </div>
+    </main>
     <footer></footer>
   </body>
 </html>

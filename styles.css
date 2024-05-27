@@ -1,19 +1,31 @@
+body{
+  margin: 0;
+  background-color: #EDEEE9;
+}
+
 
 h1 {
     font-family: 'Titan One', sans-serif;
-    color: #62AC66;
+    color:#21A179;
+    margin-left: 2%;
+    font-weight: 100;
+    font-size: 32px;
   }
   
   h2 {
     font-family: 'Julius Sans One', 'Times New Roman', Times, serif;
+    font-size: 24px;
   }
   
   h3 {
     font-family: 'Julius Sans One', 'Times New Roman', Times, serif;
+    font-size: 20px;
   }
   
-  p, li {
+  p, li, ul {
     font-family: 'nunito', 'Times New Roman', Times, serif;
+    font-size: 15px;
+    line-height: 1.5;
   }
   
   textarea{
@@ -24,12 +36,13 @@ h1 {
     margin: 50px;
     padding: 50px;
     max-width: 300px;
-    border: #278D2B solid;
+    border: #21A179 solid;
+    text-align: center;
   }
   
   button {
     font-family: 'nunito', 'Times New Roman', Times, serif;
-    background-color: #62AC66;
+    background-color:#004346;
     color: white;
     border-style: none;
     border-radius: 5px;
@@ -38,7 +51,7 @@ h1 {
   }
 
   button:hover{
-    background-color: #1E6B1A;
+    background-color: #81AE9D;
   }
   
   #submitBTN {
@@ -48,8 +61,8 @@ h1 {
   }
 
   .registerLogin button {
-    background-color: white;
-    color: #278D2B;
+    background-color: #EDEEE9;
+    color: #E06666;
     font-weight: 700;
     cursor: pointer;
   }
@@ -87,4 +100,41 @@ h1 {
     font-weight: bold;
     display: none;
   }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
   
+  @media (min-width: 769px){
+
+    h1{
+      font-size: 48px;
+    }
+
+    h2{
+      font-size: 36px;
+    }
+
+    h3{
+      font-size: 30px;
+    }
+    p, ul{
+      font-size: 18px;
+    }
+
+    .registerPage,
+    .loginPage {
+      justify-content: center;
+      justify-self: center;
+      align-self:center;
+      align-items: center;
+    }
+  }

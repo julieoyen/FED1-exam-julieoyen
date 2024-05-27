@@ -87,18 +87,24 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => {
         if (response.ok) {
-          alert("Post updated successfully!");
-          window.location.href = "/post/index.html";
+          displayNotification("Post updated successfully!", true);
+          setTimeout(() => {
+            window.location.href = "/post/index.html";
+          }, 2000);
         } else {
           return response.json().then((data) => {
-            alert("Failed to update post: " + data.message);
+            displayNotification(
+              "Failed to update post: " + data.message,
+              false
+            );
           });
         }
       })
       .catch((error) => {
         console.error("Error updating post:", error);
-        alert(
-          "Error updating post. Please check the console for more information."
+        displayNotification(
+          "Error updating post. Please check the console for more information.",
+          false
         );
       });
   };
@@ -122,5 +128,15 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteButton.className = "delete-btn";
     deleteButton.onclick = () => listItem.remove();
     listItem.appendChild(deleteButton);
+  }
+
+  function displayNotification(message, success) {
+    const notification = document.getElementById("notification");
+    notification.textContent = message;
+    notification.style.backgroundColor = success ? "#1E6B1A" : "#D32F2F";
+    notification.style.display = "block";
+    setTimeout(() => {
+      notification.style.display = "none";
+    }, 3000);
   }
 });

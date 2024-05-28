@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error fetching data:", error);
       postContent.innerHTML =
         "<p class='error' role='alert'>Error fetching the blog post. Please try again later.</p>";
+      postContent.focus();
     }
   }
 

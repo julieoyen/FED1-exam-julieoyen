@@ -22,6 +22,7 @@
           id="error-message"
           class="error-message"
           aria-live="assertive"
+          role="alert"
         ></div>
 
         <label for="email">Email:</label>
@@ -32,6 +33,7 @@
           placeholder="email@stud.noroff.no"
           required
           aria-required="true"
+          aria-describedby="email-error"
         />
         <span id="email-error" class="field-error" role="alert"></span>
 
@@ -43,6 +45,7 @@
           placeholder="required"
           required
           aria-required="true"
+          aria-describedby="username-error"
         />
         <span id="username-error" class="field-error" role="alert"></span>
 
@@ -55,6 +58,7 @@
           required
           minlength="8"
           aria-required="true"
+          aria-describedby="password-error"
         />
         <span id="password-error" class="field-error" role="alert"></span>
 
@@ -67,11 +71,18 @@
           required
           minlength="8"
           aria-required="true"
+          aria-describedby="repeatPassword-error"
         />
         <span id="repeatPassword-error" class="field-error" role="alert"></span>
 
         <label for="avatar">Avatar URL:</label>
-        <input type="text" id="avatar" name="avatar" placeholder="optional" />
+        <input
+          type="text"
+          id="avatar"
+          name="avatar"
+          placeholder="optional"
+          aria-describedby="avatar-error"
+        />
         <span id="avatar-error" class="field-error" role="alert"></span>
 
         <button type="submit" class="submit">REGISTER</button>

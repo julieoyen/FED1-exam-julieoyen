@@ -25,6 +25,11 @@ button {
   padding: 5px 15px;
 }
 
+button:focus {
+  outline: 2px solid #21A179;
+  outline-offset: 2px;
+}
+
 label {
   text-align: left;
   width: 100%;
@@ -33,12 +38,24 @@ label {
 
 input {
   width: 100%; 
+  padding: 5px;
+  margin-top: 5px;
 }
 
 .registerPage {
   margin: 50px;
   padding: 50px;
   max-width: 300px;
-  border: #21A179 solid;
+  border: 1px solid #21A179;
   text-align: center;
+}
+
+.error-message, .field-error {
+  display: none;
+}
+
+.error-message[aria-live="assertive"] {
+  display: block;
+  color: red;
+  font-weight: bold;
 }

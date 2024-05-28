@@ -22,6 +22,7 @@
           id="error-message"
           class="error-message"
           aria-live="assertive"
+          role="alert"
         ></div>
 
         <label for="email">Email:</label>
@@ -31,6 +32,7 @@
           name="email"
           required
           aria-required="true"
+          aria-describedby="email-error"
         />
         <span id="email-error" class="field-error" role="alert"></span>
 
@@ -41,6 +43,7 @@
           name="password"
           required
           aria-required="true"
+          aria-describedby="password-error"
         />
         <span id="password-error" class="field-error" role="alert"></span>
 

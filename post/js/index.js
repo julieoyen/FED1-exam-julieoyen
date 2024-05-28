@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error fetching posts:", error);
       postsContainer.innerHTML =
         "<p class='error' role='alert'>Error fetching posts. Please try again later.</p>";
+      postsContainer.focus();
     }
   }
 
@@ -45,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
       postElement.classList.add("post");
       postElement.setAttribute("role", "article");
       postElement.innerHTML = `
-        <div>
-          <h3>${post.title}</h3>
+        <div class="posts">
+          <h4>${post.title}</h4>
           ${
             post.media
               ? `<a target="_blank" href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`

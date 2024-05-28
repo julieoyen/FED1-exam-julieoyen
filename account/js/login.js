@@ -40,6 +40,7 @@ async function handleLogin(
       errorMessageElement,
       "Please enter both email and password."
     );
+    emailElement.focus();
     return;
   }
 
@@ -81,6 +82,7 @@ function showErrorMessage(element, message) {
   if (element) {
     element.textContent = message;
     element.style.display = "block";
+    element.focus();
   }
 }
 

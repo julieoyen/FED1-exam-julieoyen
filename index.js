@@ -37,7 +37,7 @@ function createPostHTML(post) {
         <div class="single-blog-post">
             <div class="overlay">
                 <a href="/post/blog-post.html?ID=${post.id}">
-                    <h3 id="carouselTitle">${post.title}</h3>
+                    <h3 class="carouselTitle">${post.title}</h3>
                 </a>
                 ${
                   post.media
@@ -50,7 +50,7 @@ function createPostHTML(post) {
 
 function renderCarousel() {
   const fragment = document.createDocumentFragment();
-  const postsToShow = allPosts.slice(0, 3); // Only show the three newest posts
+  const postsToShow = allPosts.slice(0, 3);
   postsToShow.forEach((post, index) => {
     const container = document.createElement("div");
     container.classList.add("carousel-item-container");
@@ -61,7 +61,7 @@ function renderCarousel() {
   content.innerHTML = "";
   content.appendChild(fragment);
   updateNavigation();
-  centerCarousel(); // Ensure the carousel is centered
+  centerCarousel();
 }
 
 function moveSlide(step) {
@@ -77,7 +77,7 @@ function moveSlide(step) {
 
   setTimeout(() => {
     isTransitioning = false;
-  }, 1000); // Duration of the CSS transition
+  }, 1000);
 }
 
 function updateNavigation() {
@@ -132,10 +132,10 @@ function filterPostsByTag() {
       : allPosts.filter((post) => post.tags && post.tags.includes(selectedTag));
   displayPaginatedPosts(filteredPosts);
   if (selectedTag === "all") {
-    carousel.style.display = "block"; // Show the carousel
+    carousel.style.display = "block";
     renderCarousel();
   } else {
-    carousel.style.display = "none"; // Hide the carousel
+    carousel.style.display = "none";
   }
 }
 
@@ -150,9 +150,9 @@ function searchPosts() {
     : allPosts;
   displayPaginatedPosts(filteredPosts);
   if (searchTerm) {
-    carousel.style.display = "none"; // Hide the carousel
+    carousel.style.display = "none";
   } else {
-    carousel.style.display = "block"; // Show the carousel
+    carousel.style.display = "block";
     renderCarousel();
   }
 }
@@ -163,7 +163,6 @@ function attachEventListeners() {
 }
 
 function centerCarousel() {
-  // Ensure the carousel is centered
   const slides = document.querySelectorAll(".carousel-item-container");
   if (slides.length > 0) {
     slides[0].parentNode.style.justifyContent = "center";

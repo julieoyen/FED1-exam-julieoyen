@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Error fetching data:", error);
       postContent.innerHTML =
-        "<p class='error'>Error fetching the blog post. Please try again later.</p>";
+        "<p class='error' role='alert'>Error fetching the blog post. Please try again later.</p>";
     }
   }
 
@@ -27,35 +27,36 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayBlogPost(post) {
     if (!post || !post.title || !post.body || !post.author) {
       postContent.innerHTML =
-        "<p class='error'>Incomplete post data. Please try again later.</p>";
+        "<p class='error' role='alert'>Incomplete post data. Please try again later.</p>";
       return;
     }
 
     document.title = post.title;
 
-    const container = document.createElement("div");
+    const container = document.createElement("article");
+    container.setAttribute("role", "article");
 
     const ingredientsMatch = post.body.match(/<ul>[\s\S]*?<\/ul>/);
     const ingredientsHTML = ingredientsMatch ? ingredientsMatch[0] : "";
     const instructions = post.body.replace(ingredientsHTML, "").trim();
 
     container.innerHTML = `
-      <h2>${post.title}</h2>
+      <h1>${post.title}</h1>
       ${
         post.media
           ? `<img src="${post.media.url}" alt="${post.media.alt}" class="postImg">`
           : ""
       }
-      ${ingredientsHTML ? `<h3>Ingredients</h3>${ingredientsHTML}` : ""}
+      ${ingredientsHTML ? `<h2>Ingredients</h2>${ingredientsHTML}` : ""}
       ${
         instructions
-          ? `<h3>Instructions</h3><p>${instructions.replace(
+          ? `<h2>Instructions</h2><div role="document"><p>${instructions.replace(
               /\n/g,
               "</p><p>"
-            )}</p>`
+            )}</p></div>`
           : ""
       }
-      <div class="bottom">
+      <div class="bottom" role="contentinfo">
       ${
         post.tags && post.tags.length
           ? `<p>Tag: ${post.tags.join(", ")}</p>`
@@ -64,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <p>Posted: ${new Date(post.created).toLocaleDateString()}</p>
       <p>Author: ${post.author.name}</p>
       </div>
- 
     `;
     postContent.appendChild(container);
   }

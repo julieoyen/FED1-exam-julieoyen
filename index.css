@@ -63,7 +63,7 @@
     margin: 5px 0px;
 }
 
-#carouselTitle {
+.carouselTitle {
     position: absolute;
     font-size: large;
     bottom: 20px;
@@ -143,9 +143,6 @@
     cursor: not-allowed;
 }
 
-#carouselTitle {
-    font-size: x-large;
-}
 .single-blog-post {
     min-width: 100%;
 }
@@ -173,6 +170,7 @@
 }
 
 @media (min-width: 769px) {
+
     .carousel-slides {
         justify-content: center; /* Center the slides */
     }

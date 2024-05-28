@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchPosts(username, authToken);
   } else {
     alert("User not authenticated. Please log in.");
-    window.location.href = "/login.html";
+    window.location.href = "/account/login.html";
     return;
   }
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Error fetching posts:", error);
       postsContainer.innerHTML =
-        "<p class='error'>Error fetching posts. Please try again later.</p>";
+        "<p class='error' role='alert'>Error fetching posts. Please try again later.</p>";
     }
   }
 
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     posts.forEach((post) => {
       const postElement = document.createElement("div");
       postElement.classList.add("post");
+      postElement.setAttribute("role", "article");
       postElement.innerHTML = `
         <div>
           <h3>${post.title}</h3>
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
               : ""
           }
         </div>
-        <div class="buttons">
+        <div class="buttons" role="group" aria-label="Post actions">
           <button class="edit-btn" data-id="${post.id}">Edit</button>
           <button class="delete-btn" data-id="${post.id}">Delete</button>
         </div>
@@ -100,4 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
+
+  const logoutButton = document.getElementById("logoutButton");
+  logoutButton.addEventListener("click", () => {
+    if (confirm("Are you sure you want to log out?")) {
+      sessionStorage.removeItem("userName");
+      sessionStorage.removeItem("authToken");
+      alert("You have been logged out.");
+      window.location.href = "/account/login.html";
+    }
+  });
 });

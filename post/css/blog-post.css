@@ -2,20 +2,6 @@ body {
   margin: 0;
 }
 
-header {
-  font-family: 'Titan one', 'Times New Roman', Times, serif;
-  color: #21A179;
-  text-align: center;
-  background-color: #E6F9ED;
-  padding-top: 40px;
-  padding-bottom: 15px;
-  font-size: larger;
-}
-
-a {
-  text-decoration: none;
-}
-
 #post-content {
   margin: 20px;
   display: flex;
@@ -27,35 +13,33 @@ a {
 
 #post-content img {
   width: 100%;
-  max-width: auto; 
   height: auto;
   display: block;
 }
 
-h2 {
+h1 {
   align-items: center;
   text-align: center;
+  margin: 20px 0;
 }
 
-.bottom{
+.bottom {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: solid 1px #21A179 ;
+  border: solid 1px #21A179;
   padding: 0px 15px;
 }
 
 @media (min-width: 769px) {
   #post-content {
-    margin: 40px 400px;
+    margin: 40px 300px;
     padding: 50px 100px;
-    
   }
 
-  #post-content img{
+  #post-content img {
     max-height: 650px;
     max-width: 1400px;
     object-fit: cover;
   }
-
 }

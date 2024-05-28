@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!username || !authToken) {
     alert("User not authenticated. Please log in.");
-    window.location.href = "/login.html";
+    window.location.href = "/account/login.html";
     return;
   }
 
@@ -23,17 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         const post = data.data;
-        document.getElementById("title").value = post.title;
-        document.getElementById("body").value = post.body
-          .replace(/<ul>[\s\S]*?<\/ul>/, "")
-          .trim();
-        document.getElementById("mediaUrl").value = post.media
-          ? post.media.url
-          : "";
-        document.getElementById("mediaAlt").value = post.media
-          ? post.media.alt
-          : "";
-        document.getElementById("tags").value = post.tags.join(", ");
+        setValue("title", post.title);
+        setValue("body", post.body.replace(/<ul>[\s\S]*?<\/ul>/, "").trim());
+        setValue("mediaUrl", post.media ? post.media.url : "");
+        setValue("mediaAlt", post.media ? post.media.alt : "");
+        setValue("tags", post.tags.join(", "));
 
         const listItemsMatch = post.body.match(/<ul>[\s\S]*?<\/ul>/);
         if (listItemsMatch) {
@@ -41,9 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const doc = parser.parseFromString(listItemsMatch[0], "text/html");
           const listItems = doc.querySelectorAll("li");
           listItems.forEach((item) => {
-            const listItem = document.createElement("li");
-            listItem.textContent = item.textContent;
-            addDeleteButton(listItem);
+            const listItem = createListItem(item.textContent);
             document.getElementById("list").appendChild(listItem);
           });
         }
@@ -51,16 +43,19 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error fetching post details:", error));
   }
 
+  function setValue(id, value) {
+    document.getElementById(id).value = value;
+  }
+
   window.submitEdit = function (event) {
     event.preventDefault();
-    const title = document.getElementById("title").value;
-    const body = document.getElementById("body").value;
-    const tags = document
-      .getElementById("tags")
-      .value.split(",")
+    const title = getValue("title");
+    const body = getValue("body");
+    const tags = getValue("tags")
+      .split(",")
       .map((tag) => tag.trim());
-    const mediaUrl = document.getElementById("mediaUrl").value;
-    const mediaAlt = document.getElementById("mediaAlt").value;
+    const mediaUrl = getValue("mediaUrl");
+    const mediaAlt = getValue("mediaAlt");
 
     const listItems = document.querySelectorAll("#list li");
     let listHTML = "<ul>";
@@ -114,13 +109,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const listItemValue = listItemInput.value.trim();
 
     if (listItemValue) {
-      const listItem = document.createElement("li");
-      listItem.textContent = listItemValue;
-      addDeleteButton(listItem);
+      const listItem = createListItem(listItemValue);
       document.getElementById("list").appendChild(listItem);
       listItemInput.value = "";
     }
   };
+
+  function createListItem(text) {
+    const listItem = document.createElement("li");
+    listItem.textContent = text;
+    addDeleteButton(listItem);
+    return listItem;
+  }
 
   function addDeleteButton(listItem) {
     const deleteButton = document.createElement("button");
@@ -135,8 +135,17 @@ document.addEventListener("DOMContentLoaded", function () {
     notification.textContent = message;
     notification.style.backgroundColor = success ? "#1E6B1A" : "#D32F2F";
     notification.style.display = "block";
+    notification.focus();
     setTimeout(() => {
       notification.style.display = "none";
     }, 3000);
+  }
+
+  window.cancelEdit = function () {
+    window.location.href = "/post/index.html";
+  };
+
+  function getValue(id) {
+    return document.getElementById(id).value;
   }
 });

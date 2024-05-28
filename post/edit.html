@@ -17,29 +17,86 @@
   <body>
     <div class="container">
       <h1>Edit Recipe</h1>
-      <form id="editPostForm" onsubmit="submitEdit(event)">
+      <form
+        id="editPostForm"
+        onsubmit="submitEdit(event)"
+        aria-describedby="formDescription"
+      >
+        <p id="formDescription">
+          Use this form to edit your recipe. Fill out the fields and click save
+          when done.
+        </p>
+
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required />
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          aria-required="true"
+          aria-labelledby="titleLabel"
+        />
+        <span id="titleLabel" class="visually-hidden">Title of the recipe</span>
 
         <label for="listItem">Add Ingredient:</label>
-        <input type="text" id="listItem" />
-        <button type="button" onclick="addListItem()">Add to List</button>
+        <input type="text" id="listItem" aria-labelledby="listItemLabel" />
+        <span id="listItemLabel" class="visually-hidden"
+          >Ingredient to add to the list</span
+        >
+        <button
+          type="button"
+          onclick="addListItem()"
+          aria-label="Add ingredient to the list"
+        >
+          Add to List
+        </button>
 
         <ul id="list" role="list" aria-label="Ingredients list"></ul>
 
         <label for="body">Recipe Instructions:</label>
-        <textarea id="body" name="body"></textarea>
+        <textarea id="body" name="body" aria-labelledby="bodyLabel"></textarea>
+        <span id="bodyLabel" class="visually-hidden"
+          >Instructions for the recipe</span
+        >
 
         <label for="tags">Tags (comma-separated):</label>
-        <input type="text" id="tags" name="tags" />
+        <input type="text" id="tags" name="tags" aria-labelledby="tagsLabel" />
+        <span id="tagsLabel" class="visually-hidden"
+          >Tags for the recipe, separated by commas</span
+        >
 
         <label for="mediaUrl">Image URL:</label>
-        <input type="url" id="mediaUrl" name="mediaUrl" />
+        <input
+          type="url"
+          id="mediaUrl"
+          name="mediaUrl"
+          aria-labelledby="mediaUrlLabel"
+        />
+        <span id="mediaUrlLabel" class="visually-hidden"
+          >URL of the image for the recipe</span
+        >
 
         <label for="mediaAlt">Image Alt Text:</label>
-        <input type="text" id="mediaAlt" name="mediaAlt" />
-
-        <button id="submitBTN" type="submit">Save Changes</button>
+        <input
+          type="text"
+          id="mediaAlt"
+          name="mediaAlt"
+          aria-labelledby="mediaAltLabel"
+        />
+        <span id="mediaAltLabel" class="visually-hidden"
+          >Alternative text for the image</span
+        >
+        <div class="saveCancel">
+          <button id="submitBTN" type="submit">Save</button>
+          <button
+            id="cancelBTN"
+            type="button"
+            onclick="cancelEdit()"
+            aria-label="Cancel edit and return to posts"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
       <div id="notification" aria-live="polite" aria-atomic="true"></div>
     </div>

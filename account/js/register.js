@@ -39,6 +39,7 @@ function validateEmail(email) {
       "email-error",
       "Invalid email address. Must be @stud.noroff.no"
     );
+    email.focus();
     return false;
   }
   hideFieldError("email-error");
@@ -51,10 +52,12 @@ function validatePasswords(password, repeatPassword) {
       "password-error",
       "Password must be at least 8 characters long."
     );
+    password.focus();
     return false;
   }
   if (password.value !== repeatPassword.value) {
     showFieldError("repeatPassword-error", "Passwords do not match!");
+    repeatPassword.focus();
     return false;
   }
   hideFieldError("password-error");
@@ -125,6 +128,7 @@ function showErrorMessage(element, message) {
   if (element) {
     element.textContent = message;
     element.style.display = "block";
+    element.focus();
   }
 }
 
@@ -140,6 +144,7 @@ function showFieldError(fieldId, message) {
   if (fieldError) {
     fieldError.textContent = message;
     fieldError.style.display = "block";
+    fieldError.focus();
   }
 }
 

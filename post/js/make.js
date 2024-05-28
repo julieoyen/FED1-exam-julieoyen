@@ -24,7 +24,7 @@ function handleFormSubmit(event, errorMessageElement) {
 
   if (!userName || !authToken) {
     showError(errorMessageElement, "User not authenticated. Please log in.");
-    window.location.href = "/login.html";
+    window.location.href = "/account/login.html";
     return;
   }
 

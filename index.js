@@ -21,6 +21,7 @@ async function fetchPosts() {
     console.error("Error fetching data:", error);
     content.innerHTML =
       "<p>Error fetching the blog posts. Please try again later.</p>";
+    content.focus();
   }
 }
 

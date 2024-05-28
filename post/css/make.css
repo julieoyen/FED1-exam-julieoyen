@@ -40,6 +40,10 @@ textarea {
   resize: vertical;
 }
 
+input:focus, textarea:focus {
+  outline: 2px solid #21A179;
+  outline-offset: 2px;
+}
 
 #list {
   margin-top: 10px;
@@ -53,4 +57,3 @@ textarea {
   justify-content: space-between;
   align-items: center;
 }
-

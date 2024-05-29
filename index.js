@@ -78,7 +78,7 @@ function moveSlide(step) {
 
   setTimeout(() => {
     isTransitioning = false;
-  }, 1000);
+  }, 100);
 }
 
 function updateNavigation() {

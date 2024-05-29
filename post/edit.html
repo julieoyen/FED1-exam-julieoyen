@@ -22,7 +22,7 @@
         onsubmit="submitEdit(event)"
         aria-describedby="formDescription"
       >
-        <p id="formDescription">
+        <p class="visually-hidden" id="formDescription">
           Use this form to edit your recipe. Fill out the fields and click save
           when done.
         </p>
@@ -86,6 +86,7 @@
         <span id="mediaAltLabel" class="visually-hidden"
           >Alternative text for the image</span
         >
+
         <div class="saveCancel">
           <button id="submitBTN" type="submit">Save</button>
           <button
@@ -98,7 +99,9 @@
           </button>
         </div>
       </form>
-      <div id="notification" aria-live="polite" aria-atomic="true"></div>
+      <div id="successMessage" class="success-message">
+        Post successfully saved!
+      </div>
     </div>
   </body>
 </html>

@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const authToken = sessionStorage.getItem("authToken");
   const usernameElement = document.getElementById("username");
   const postsContainer = document.getElementById("postsContainer");
+  const paginationControls = document.getElementById("paginationControls");
+
+  let posts = [];
+  let currentPage = 1;
+  const postsPerPage = 12;
 
   if (username && authToken) {
     usernameElement.textContent = username;
@@ -26,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Failed to fetch posts");
       }
       const data = await response.json();
-      displayPosts(data.data);
+      posts = data.data;
+      displayPage(currentPage);
+      setupPagination();
     } catch (error) {
       console.error("Error fetching posts:", error);
       postsContainer.innerHTML =
@@ -35,33 +42,67 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function displayPosts(posts) {
+  function displayPage(page) {
     postsContainer.innerHTML = "";
-    if (!posts.length) {
+    const start = (page - 1) * postsPerPage;
+    const end = page * postsPerPage;
+    const paginatedPosts = posts.slice(start, end);
+
+    if (!paginatedPosts.length) {
       postsContainer.innerHTML = "<p>No posts available.</p>";
       return;
     }
-    posts.forEach((post) => {
+
+    paginatedPosts.forEach((post) => {
       const postElement = document.createElement("div");
       postElement.classList.add("post");
       postElement.setAttribute("role", "article");
       postElement.innerHTML = `
-        <div class="posts">
-          <h4>${post.title}</h4>
-          ${
-            post.media
-              ? `<a target="_blank" href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
-              : ""
-          }
-        </div>
-        <div class="buttons" role="group" aria-label="Post actions">
-          <button class="edit-btn" data-id="${post.id}">Edit</button>
-          <button class="delete-btn" data-id="${post.id}">Delete</button>
-        </div>
-      `;
+              <div class="posts">
+                  <h4>${post.title}</h4>
+                  ${
+                    post.media
+                      ? `<a target="_blank" href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
+                      : ""
+                  }
+              </div>
+              <div class="buttons" role="group" aria-label="Post actions">
+                  <button class="edit-btn" data-id="${post.id}">Edit</button>
+                  <button class="delete-btn" data-id="${
+                    post.id
+                  }">Delete</button>
+              </div>
+          `;
       postsContainer.appendChild(postElement);
     });
     addEventListeners();
+  }
+
+  function setupPagination() {
+    paginationControls.innerHTML = "";
+    const pageCount = Math.ceil(posts.length / postsPerPage);
+
+    for (let i = 1; i <= pageCount; i++) {
+      const button = document.createElement("button");
+      button.textContent = i;
+      button.addEventListener("click", () => {
+        currentPage = i;
+        displayPage(currentPage);
+        updatePaginationButtons();
+      });
+      paginationControls.appendChild(button);
+    }
+    updatePaginationButtons();
+  }
+
+  function updatePaginationButtons() {
+    Array.from(paginationControls.children).forEach((button, index) => {
+      if (index + 1 === currentPage) {
+        button.setAttribute("disabled", "disabled");
+      } else {
+        button.removeAttribute("disabled");
+      }
+    });
   }
 
   function addEventListeners() {

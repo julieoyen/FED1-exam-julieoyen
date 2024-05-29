@@ -37,6 +37,7 @@ textarea{
 }
 
 /* BUTTONS */ 
+
 button {
     font-family: 'nunito', 'Times New Roman', Times, serif;
     background-color:#004346;
@@ -52,7 +53,7 @@ button:hover{
 }
 
 .delete-btn, #cancelBTN {
-  background-color: #E06666;
+  background-color: #D73C3C;
   color: white;
   border: none;
   cursor: pointer;
@@ -60,6 +61,9 @@ button:hover{
   border-radius: 5px;
 }
 
+.delete-btn:hover, #cancelBTN:hover{
+    background-color:#E06666 ;
+}
 #cancelBTN{
   padding: 5px 10px;
   margin-left: 5px;
@@ -72,7 +76,7 @@ button:hover{
 
 .registerLogin button {
     background-color: #EDEEE9;
-    color: #E06666;
+    color: #D73C3C;
     font-weight: 700;
     cursor: pointer;
 }
@@ -174,9 +178,7 @@ form {
 
 /* ERROR messages */
 
-.delete-btn:hover, #cancelBTN:hover{
-    background-color: #D73C3C;
-}
+
 
 .error-message, .error, .field-error {
   display: none;

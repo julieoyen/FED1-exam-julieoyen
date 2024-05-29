@@ -65,18 +65,35 @@ img {
 }
 
 #logoutButton:focus {
-    outline: 2px solid #21A179;
+    outline: 2px solid #1D906C;
     outline-offset: 2px;
 }
 
-@media (min-width: 600px) {
-    #logoutButton {
-        padding: 10px 20px;
-        font-size: 16px;
-    }
-    .posts {
-        margin: 0 5px;
-    }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #004346;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+.pagination button:focus {
+    outline: 2px solid #81AE9D;
+    outline-offset: 2px;
+}
+
+.pagination button[disabled] {
+    background-color: #CCC;
+    cursor: not-allowed;
 }
 
 @media (max-width: 599px) {
@@ -106,5 +123,15 @@ img {
         max-height: 100%;
         max-width: 250px;
         object-fit: cover;
+    }
+}
+@media (min-width: 600px) {
+    #logoutButton {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-right: 15px;
+    }
+    .posts {
+        margin: 0 5px;
     }
 }

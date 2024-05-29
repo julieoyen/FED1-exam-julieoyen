@@ -27,7 +27,8 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: solid 1px #21A179;
+  border: solid 1px #1D906C;
+  margin-top: 50px;
   padding: 0px 15px;
 }
 

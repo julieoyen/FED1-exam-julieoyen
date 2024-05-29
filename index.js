@@ -100,6 +100,7 @@ function displayPaginatedPosts(posts) {
     fragment.appendChild(postDiv);
   });
   paginationContent.appendChild(fragment);
+  updatePaginationControls();
 }
 
 function changePage(step) {
@@ -168,6 +169,18 @@ function centerCarousel() {
   if (slides.length > 0) {
     slides[0].parentNode.style.justifyContent = "center";
   }
+}
+
+function updatePaginationControls() {
+  const prevButton = document.querySelector(
+    '.pagination-controls button[aria-label="Previous Page"]'
+  );
+  const nextButton = document.querySelector(
+    '.pagination-controls button[aria-label="Next Page"]'
+  );
+  const numberOfPages = Math.ceil(allPosts.length / postsPerPage);
+  prevButton.disabled = currentPage === 0;
+  nextButton.disabled = currentPage === numberOfPages - 1;
 }
 
 fetchPosts();

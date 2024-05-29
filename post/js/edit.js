@@ -82,25 +82,15 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => {
         if (response.ok) {
-          displayNotification("Post updated successfully!", true);
-          setTimeout(() => {
-            window.location.href = "/post/index.html";
-          }, 2000);
+          showSuccessMessage();
         } else {
           return response.json().then((data) => {
-            displayNotification(
-              "Failed to update post: " + data.message,
-              false
-            );
+            console.error("Failed to update post: " + data.message);
           });
         }
       })
       .catch((error) => {
         console.error("Error updating post:", error);
-        displayNotification(
-          "Error updating post. Please check the console for more information.",
-          false
-        );
       });
   };
 
@@ -130,22 +120,20 @@ document.addEventListener("DOMContentLoaded", function () {
     listItem.appendChild(deleteButton);
   }
 
-  function displayNotification(message, success) {
-    const notification = document.getElementById("notification");
-    notification.textContent = message;
-    notification.style.backgroundColor = success ? "#1E6B1A" : "#D32F2F";
-    notification.style.display = "block";
-    notification.focus();
-    setTimeout(() => {
-      notification.style.display = "none";
-    }, 3000);
-  }
-
   window.cancelEdit = function () {
     window.location.href = "/post/index.html";
   };
 
   function getValue(id) {
     return document.getElementById(id).value;
+  }
+
+  function showSuccessMessage() {
+    const successMessage = document.getElementById("successMessage");
+    successMessage.style.display = "block";
+    setTimeout(() => {
+      successMessage.style.display = "none";
+      window.location.href = "/post/index.html";
+    }, 3000);
   }
 });

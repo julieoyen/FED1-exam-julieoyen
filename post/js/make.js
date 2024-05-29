@@ -74,7 +74,7 @@ async function createPost(postUrl, authToken, postData, errorMessageElement) {
 
     const data = await response.json();
     if (data.data) {
-      window.location.href = "/post/index.html";
+      showSuccessMessage();
     } else {
       showError(errorMessageElement, "Failed to create post: " + data.message);
     }
@@ -115,3 +115,16 @@ function showError(element, message) {
   element.textContent = message;
   element.style.display = "block";
 }
+
+function showSuccessMessage() {
+  const successMessage = document.getElementById("successMessage");
+  successMessage.style.display = "block";
+  setTimeout(() => {
+    successMessage.style.display = "none";
+    window.location.href = "/post/index.html";
+  }, 2000);
+}
+
+window.cancelEdit = function () {
+  window.location.href = "/post/index.html";
+};

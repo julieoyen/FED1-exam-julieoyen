@@ -9,6 +9,8 @@ let currentPage = 0;
 let allPosts = [];
 const postsPerPage = 12;
 let isTransitioning = false;
+let startX = 0;
+let endX = 0;
 
 async function fetchPosts() {
   try {
@@ -35,18 +37,18 @@ function init() {
 
 function createPostHTML(post) {
   return `
-        <div class="single-blog-post">
-            <div class="overlay">
-                <a href="/post/blog-post.html?ID=${post.id}">
-                    <h3 class="carouselTitle">${post.title}</h3>
-                </a>
-                ${
-                  post.media
-                    ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
-                    : ""
-                }
-            </div>
-        </div>`;
+    <div class="single-blog-post">
+      <div class="overlay">
+        <a href="/post/blog-post.html?ID=${post.id}">
+          <h3 class="carouselTitle">${post.title}</h3>
+        </a>
+        ${
+          post.media
+            ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
+            : ""
+        }
+      </div>
+    </div>`;
 }
 
 function renderCarousel() {
@@ -86,6 +88,22 @@ function updateNavigation() {
   const nextButton = document.querySelector(".carousel-control.next");
   prevButton.addEventListener("click", () => moveSlide(-1));
   nextButton.addEventListener("click", () => moveSlide(1));
+}
+
+function handleTouchStart(event) {
+  startX = event.touches[0].clientX;
+}
+
+function handleTouchMove(event) {
+  endX = event.touches[0].clientX;
+}
+
+function handleTouchEnd() {
+  if (startX - endX > 50) {
+    moveSlide(1); // Swiped left
+  } else if (endX - startX > 50) {
+    moveSlide(-1); // Swiped right
+  }
 }
 
 function displayPaginatedPosts(posts) {
@@ -162,6 +180,9 @@ function searchPosts() {
 function attachEventListeners() {
   tagFilter.addEventListener("change", filterPostsByTag);
   searchInput.addEventListener("input", searchPosts);
+  content.addEventListener("touchstart", handleTouchStart);
+  content.addEventListener("touchmove", handleTouchMove);
+  content.addEventListener("touchend", handleTouchEnd);
 }
 
 function centerCarousel() {

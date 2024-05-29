@@ -16,11 +16,13 @@
     flex: 0 0 100%;
     max-width: 100%;
     display: none;
+    transition: transform 0.5s ease-in-out; /* Smooth transition for swipes */
 }
 
 .carousel-item-container.active {
     display: block; 
 }
+
 
 .single-blog-post {
     box-sizing: border-box;
@@ -49,11 +51,6 @@
 
 .carousel-control.next {
     right: 10px;
-}
-
-.carousel-control:focus {
-    outline: 2px solid #1D906C;
-    outline-offset: 2px;
 }
 
 .overlay {

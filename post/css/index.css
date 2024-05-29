@@ -50,15 +50,15 @@ img {
 
 #logoutButton {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top:15px;
+    right: 20px;
     background-color:#E06666;
     color: white;
     border: none;
     cursor: pointer;
-    padding: 5px 10px;
-    font-size: 14px;
+    font-size: 20px;
 }
+
 
 #logoutButton:hover {
     background-color: #D73C3C;
@@ -124,4 +124,12 @@ img {
         max-width: 250px;
 
     }
+
+    #logoutButton{
+        padding: 5px 10px;
+        top: 15px;
+        right: 20px;
+        font-size: 15px;
+    }
+
 }

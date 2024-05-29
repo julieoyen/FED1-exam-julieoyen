@@ -4,13 +4,17 @@ const paginationContent = document.getElementById("posts-pagination");
 const tagFilter = document.getElementById("tag-filter");
 const searchInput = document.getElementById("search-input");
 const carousel = document.querySelector(".carousel");
+
 let currentSlide = 0;
-let currentPage = 0;
+let currentPage = 1;
 let allPosts = [];
-const postsPerPage = 12;
+let mainPosts = [];
+let postsPerPage = 12;
 let isTransitioning = false;
 let startX = 0;
 let endX = 0;
+let myTag = "";
+let searchTimeout;
 
 async function fetchPosts() {
   try {
@@ -29,7 +33,7 @@ async function fetchPosts() {
 
 function init() {
   populateTags();
-  displayPaginatedPosts(allPosts);
+  fetchMainContent();
   window.addEventListener("resize", renderCarousel);
   attachEventListeners();
   renderCarousel();
@@ -100,18 +104,17 @@ function handleTouchMove(event) {
 
 function handleTouchEnd() {
   if (startX - endX > 50) {
-    moveSlide(1); // Swiped left
+    moveSlide(1);
   } else if (endX - startX > 50) {
-    moveSlide(-1); // Swiped right
+    moveSlide(-1);
   }
 }
 
-function displayPaginatedPosts(posts) {
+function appendMain(posts) {
   paginationContent.innerHTML = "";
   const fragment = document.createDocumentFragment();
-  const startIndex = currentPage * postsPerPage;
-  const endIndex = Math.min(startIndex + postsPerPage, posts.length);
-  posts.slice(startIndex, endIndex).forEach((post) => {
+
+  posts.forEach((post) => {
     const postDiv = document.createElement("div");
     postDiv.classList.add("single-pagination-post");
     postDiv.innerHTML = createPostHTML(post);
@@ -123,19 +126,20 @@ function displayPaginatedPosts(posts) {
 
 function changePage(step) {
   const numberOfPages = Math.ceil(allPosts.length / postsPerPage);
-  currentPage = Math.max(0, Math.min(currentPage + step, numberOfPages - 1));
-  displayPaginatedPosts(allPosts);
+  currentPage = Math.max(1, Math.min(currentPage + step, numberOfPages));
+  fetchMainContent().then(updatePaginationButtons);
 }
 
 function populateTags() {
   const tags = new Set();
   allPosts.forEach((post) => {
-    if (post.tags)
+    if (post.tags) {
       post.tags.forEach((tag) => {
         if (tag.trim()) tags.add(tag);
       });
+    }
   });
-  tagFilter.innerHTML = '<option value="all">View all tags</option>';
+  tagFilter.innerHTML = '<option value="">View all tags</option>';
   tags.forEach((tag) => {
     const option = document.createElement("option");
     option.value = tag;
@@ -145,36 +149,41 @@ function populateTags() {
 }
 
 function filterPostsByTag() {
-  const selectedTag = tagFilter.value;
-  const filteredPosts =
-    selectedTag === "all"
-      ? allPosts
-      : allPosts.filter((post) => post.tags && post.tags.includes(selectedTag));
-  displayPaginatedPosts(filteredPosts);
-  if (selectedTag === "all") {
-    carousel.style.display = "block";
-    renderCarousel();
-  } else {
-    carousel.style.display = "none";
-  }
+  myTag = tagFilter.value;
+  currentPage = 1;
+  fetchMainContent().then(updatePaginationButtons);
 }
 
 function searchPosts() {
-  const searchTerm = searchInput.value.toLowerCase();
-  const filteredPosts = searchTerm
-    ? allPosts.filter(
-        (post) =>
-          post.title.toLowerCase().includes(searchTerm) ||
-          (post.content && post.content.toLowerCase().includes(searchTerm))
-      )
-    : allPosts;
-  displayPaginatedPosts(filteredPosts);
-  if (searchTerm) {
-    carousel.style.display = "none";
-  } else {
-    carousel.style.display = "block";
-    renderCarousel();
-  }
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    const searchTerm = searchInput.value.toLowerCase();
+    if (searchTerm) {
+      postsPerPage = 100;
+    } else {
+      postsPerPage = 12;
+    }
+
+    fetchMainContent().then(() => {
+      const filteredPosts = searchTerm
+        ? mainPosts.filter(
+            (post) =>
+              post.title.toLowerCase().includes(searchTerm) ||
+              (post.content && post.content.toLowerCase().includes(searchTerm))
+          )
+        : mainPosts;
+      appendMain(filteredPosts);
+
+      if (searchTerm) {
+        carousel.style.display = "none";
+      } else {
+        carousel.style.display = "block";
+        renderCarousel();
+      }
+
+      updatePaginationButtons();
+    });
+  }, 300); // Adjust debounce time as needed
 }
 
 function attachEventListeners() {
@@ -183,6 +192,15 @@ function attachEventListeners() {
   content.addEventListener("touchstart", handleTouchStart);
   content.addEventListener("touchmove", handleTouchMove);
   content.addEventListener("touchend", handleTouchEnd);
+
+  const prevButton = document.querySelector(
+    '.pagination-controls button[aria-label="Previous Page"]'
+  );
+  const nextButton = document.querySelector(
+    '.pagination-controls button[aria-label="Next Page"]'
+  );
+  prevButton.addEventListener("click", () => changePage(-1));
+  nextButton.addEventListener("click", () => changePage(1));
 }
 
 function centerCarousel() {
@@ -200,8 +218,36 @@ function updatePaginationControls() {
     '.pagination-controls button[aria-label="Next Page"]'
   );
   const numberOfPages = Math.ceil(allPosts.length / postsPerPage);
-  prevButton.disabled = currentPage === 0;
-  nextButton.disabled = currentPage === numberOfPages - 1;
+  prevButton.disabled = currentPage === 1;
+  nextButton.disabled = currentPage === numberOfPages;
+}
+
+function updatePaginationButtons() {
+  const prevButton = document.querySelector(
+    '.pagination-controls button[aria-label="Previous Page"]'
+  );
+  const nextButton = document.querySelector(
+    '.pagination-controls button[aria-label="Next Page"]'
+  );
+  const currentItemsCount = mainPosts.length;
+  prevButton.disabled = currentPage === 1;
+  nextButton.disabled = currentItemsCount < postsPerPage;
+}
+
+async function fetchMainContent() {
+  try {
+    const response = await fetch(
+      `https://v2.api.noroff.dev/blog/posts/juliebertine/?limit=${postsPerPage}&page=${currentPage}&_tag=${myTag}`
+    );
+    if (!response.ok) throw new Error("Network response was not ok");
+    const data = await response.json();
+    mainPosts = data.data;
+    appendMain(mainPosts);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    content.innerHTML =
+      "<p>Error fetching the blog posts. Please try again later.</p>";
+  }
 }
 
 fetchPosts();

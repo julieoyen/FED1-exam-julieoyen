@@ -32,7 +32,21 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    document.title = post.title;
+    // Update document title and meta tags
+    document.title = `${post.title} - Eating Unprocessed`;
+    document
+      .querySelector('meta[name="title"]')
+      .setAttribute(
+        "content",
+        `${post.title} - Eating Unprocessed, Living well`
+      );
+    document
+      .querySelector('meta[name="description"]')
+      .setAttribute(
+        "content",
+        post.description ||
+          "Read our latest blog post on Eating Unprocessed. Discover healthy recipes, tips, and more to help you live a healthier lifestyle."
+      );
 
     const container = document.createElement("article");
     container.setAttribute("role", "article");

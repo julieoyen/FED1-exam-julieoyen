@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content="Blog Dashboard - Manage Your Posts" />
+    <meta
+      name="description"
+      content="Welcome to your Blog Dashboard! Here you can create new posts, edit or delete existing ones, and manage your content efficiently."
+    />
     <script src="/post/js/index.js" defer></script>
     <link rel="stylesheet" href="/post/css/index.css" />
     <link rel="stylesheet" href="/styles.css" />
@@ -24,6 +29,9 @@
     </button>
     <h1>Welcome, <span id="username">Username</span>!</h1>
     <div class="message" role="region" aria-live="polite">
+      <h2 class="visually-hidden">
+        On this page, there is an overview of all of the posts you have made.
+      </h2>
       <h3>Would you like to edit, delete or make a</h3>
       <button
         onclick="window.location.href='make.html'"

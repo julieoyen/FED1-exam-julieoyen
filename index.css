@@ -16,13 +16,12 @@
     flex: 0 0 100%;
     max-width: 100%;
     display: none;
-    transition: transform 0.5s ease-in-out; /* Smooth transition for swipes */
+    transition: transform 0.5s ease-in-out; 
 }
 
 .carousel-item-container.active {
-    display: block; 
+    display: block;
 }
-
 
 .single-blog-post {
     box-sizing: border-box;
@@ -61,7 +60,7 @@
 
 .single-blog-post img {
     width: 100%;
-    height: auto;     
+    height: auto;
     margin: 5px 0px;
 }
 
@@ -106,21 +105,20 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-/* pagination section*/
 
-/* Pagination section adjustments */
-/* Pagination section adjustments */
+/* pagination section */
+
 .pagination-section {
     margin: 20px 0;
     text-align: center;
-    position: relative; /* Ensure the pagination section stays in place */
+    position: relative;
 }
 
 .pagination-controls {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 20px; /* Add consistent margin to avoid layout shift */
+    margin-top: 20px; 
 }
 
 .pagination-controls button {
@@ -130,7 +128,7 @@
     color: white;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    transition: background-color 0.3s ease; 
 }
 
 .pagination-controls button:hover {
@@ -144,8 +142,7 @@
 
 .posts-grid,
 #posts-pagination {
-    padding-bottom: 20px; /* Ensure padding at the bottom to prevent overlap */
-    min-height: calc(150px * 3); /* Adjust based on the number of rows expected */
+    padding-bottom: 20px; 
 }
 
 .single-pagination-post {
@@ -153,39 +150,41 @@
     box-sizing: border-box;
     padding: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 300px; /* Ensure a minimum height to prevent layout shifts */
+    min-height: 300px; 
 }
 
 .single-pagination-post img {
-    height: 350px; /* Fixed height */
-    width: 100%; /* Fixed width to ensure consistency */
-    object-fit: cover; /* Ensure images fit well within the allocated space */
+    height: 350px; 
+    width: 100%; 
+    object-fit: cover; 
 }
-
 
 .single-blog-post {
     min-width: 100%;
 }
+
 .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 10px;
 }
+
 .single-pagination-post {
-    flex: none; 
-    width: 100%; 
+    flex: none;
+    width: 100%;
 }
+
 .single-blog-post img {
     max-height: 350px;
     max-width: auto;
     object-fit: cover;
 }
 
-#latest-recipes{
+#latest-recipes {
     text-align: center;
 }
 
-.filter-container{
+.filter-container {
     padding-top: 15px;
 }
 
@@ -196,7 +195,7 @@
     }
 
     .carousel-item-container {
-        flex: 0 0 50%; 
+        flex: 0 0 50%;
         max-width: 50%;
         height: auto;
         transition: opacity 0.5s ease, transform 0.5s ease;
@@ -215,19 +214,20 @@
     }
 
     .single-pagination-post:hover {
-        transform: scale(1.05); 
+        transform: scale(1.05);
     }
 
     .single-pagination-post img {
         max-height: auto;
         max-width: 450px;
     }
-    
+
     .posts-grid {
         grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
         gap: 10px;
     }
-    .filter-container{
+
+    .filter-container {
         padding-top: 30px;
     }
 }

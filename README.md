@@ -5,15 +5,22 @@ Welcome to the "Eating Unprocessed - Living Well" project. This project is a web
 ## Table of Contents 📚
 
 1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Installation ](#installation)
-4. [Usage](#usage)
-5. [Contributing](#contributing)
+2. [Demo](#demo)
+3. [Features](#features)
+4. [Installation ](#installation)
+5. [Usage](#usage)
 6. [License](#license)
 
 ## Project Overview 📝
 
 "Eating Unprocessed - Living Well" is a responsive web application built using HTML, CSS, and JavaScript. It allows users to create, view, edit, and delete blog posts related to unprocessed food recipes. The application is designed to be accessible and easy to navigate, ensuring a seamless user experience.
+
+## Demo
+
+index.html
+<img src="screenshots/index.gif" alt="Demo of the application">
+make.html
+<img src="screenshots/make.gif" alt="Demo of the application">
 
 ## Features ✨
 
@@ -40,17 +47,18 @@ To launch this project, click on one of the following links: <br>
 
 ## Usage 🔧
 
+### Register ✍️
+
+1. Open the registration page by navigating to `/account/register.html`.
+2. Fill out the registration form.
+3. Click the "REGISTER" button to create a new account. <br>
+   **Note:** Registering an account will not display any blog posts from this blog. You must be logged in to juloye51070@stud.noroff.no to edit/delete/create posts due to endpoint hard coding.
+
 ### Login 🔑
 
 1. Open the login page by navigating to `/account/login.html`.
 2. Enter your email and password.
 3. Click the "LOGIN" button to log in.
-
-### Register ✍️
-
-1. Open the registration page by navigating to `/account/register.html`.
-2. Fill out the registration form.
-3. Click the "REGISTER" button to create a new account.
 
 ### Creating a New Recipe Post 🥗
 
@@ -67,7 +75,7 @@ To launch this project, click on one of the following links: <br>
 ## Technology Used 💻
 
 - HTML, CSS, JavaScript
-- Figma design
+- Figma
 - Noroff Blog API
 - Netlify (For deploy of live page)
 

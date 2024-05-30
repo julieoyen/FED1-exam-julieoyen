@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   <h4>${post.title}</h4>
                   ${
                     post.media
-                      ? `<a target="_blank" href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
+                      ? `<a href="/post/blog-post.html?ID=${post.id}"><img src="${post.media.url}" alt="${post.media.alt}"></a>`
                       : ""
                   }
               </div>

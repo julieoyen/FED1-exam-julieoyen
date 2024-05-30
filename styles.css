@@ -38,7 +38,7 @@ textarea{
 
 /* BUTTONS */ 
 
-button, #back-button {
+button {
     font-family: 'nunito', 'Times New Roman', Times, serif;
     background-color:#004346;
     color: white;
@@ -48,7 +48,7 @@ button, #back-button {
     cursor: pointer;
 }
 
-button:hover, #back-button:hover{
+button:hover{
     background-color: #81AE9D;
 }
 

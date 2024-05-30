@@ -17,9 +17,9 @@ Welcome to the "Eating Unprocessed - Living Well" project. This project is a web
 
 ## Demo
 
-index.html
-<img src="screenshots/index.gif" alt="Demo of the application">
-make.html
+index.html <br>
+<img src="screenshots/index.gif" alt="Demo of the application"> <br>
+make.html <br>
 <img src="screenshots/make.gif" alt="Demo of the application">
 
 ## Features ✨

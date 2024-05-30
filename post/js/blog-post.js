@@ -78,11 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="bottom" role="contentinfo">
       ${
         post.tags && post.tags.length
-          ? `<p>Tag: ${post.tags.join(", ")}</p>`
+          ? `<p>Tag: <br> ${post.tags.join(", ")}</p>`
           : ""
       }     
-      <p>Posted: ${new Date(post.created).toLocaleDateString()}</p>
-      <p>Author: ${post.author.name}</p>
+      <p>Posted: <br> ${new Date(post.created).toLocaleDateString()}</p>
+      <p>Author: <br> ${post.author.name}</p>
       </div>
     `;
     postContent.appendChild(container);

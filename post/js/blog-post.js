@@ -2,6 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const postId = getUrlParameter("ID");
   const blogPostApi = `https://v2.api.noroff.dev/blog/posts/juliebertine/${postId}`;
   const postContent = document.getElementById("post-content");
+  const backButton = document.getElementById("back-button");
+
+  backButton.addEventListener("click", () => {
+    window.history.back();
+  });
 
   async function fetchBlogPost() {
     try {
@@ -32,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Update document title and meta tags
     document.title = `${post.title} - Eating Unprocessed`;
     document
       .querySelector('meta[name="title"]')

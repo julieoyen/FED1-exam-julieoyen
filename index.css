@@ -106,44 +106,62 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+/* pagination section*/
 
+/* Pagination section adjustments */
+/* Pagination section adjustments */
 .pagination-section {
     margin: 20px 0;
     text-align: center;
+    position: relative; /* Ensure the pagination section stays in place */
 }
 
-.posts-grid {
+.pagination-controls {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-}
-
-.single-pagination-post {
-    flex: 1 1 calc(100% - 20px); 
-    box-sizing: border-box;
-    padding: 10px;
-}
-
-.single-pagination-post img {
-    height: auto;
-    width: 100%;
+    margin-top: 20px; /* Add consistent margin to avoid layout shift */
 }
 
 .pagination-controls button {
     padding: 10px 20px;
-    margin: 30px 5px;
     border: none;
     background-color: #3D4547;
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.pagination-controls button:hover {
+    background-color: #2a2e30;
 }
 
 .pagination-controls button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+.posts-grid,
+#posts-pagination {
+    padding-bottom: 20px; /* Ensure padding at the bottom to prevent overlap */
+    min-height: calc(150px * 3); /* Adjust based on the number of rows expected */
+}
+
+.single-pagination-post {
+    flex: 1 1 calc(100% - 20px);
+    box-sizing: border-box;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 300px; /* Ensure a minimum height to prevent layout shifts */
+}
+
+.single-pagination-post img {
+    height: 350px; /* Fixed height */
+    width: 100%; /* Fixed width to ensure consistency */
+    object-fit: cover; /* Ensure images fit well within the allocated space */
+}
+
 
 .single-blog-post {
     min-width: 100%;

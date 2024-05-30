@@ -15,7 +15,7 @@ Welcome to the "Eating Unprocessed - Living Well" project. This project is a web
 
 "Eating Unprocessed - Living Well" is a responsive web application built using HTML, CSS, and JavaScript. It allows users to create, view, edit, and delete blog posts related to unprocessed food recipes. The application is designed to be accessible and easy to navigate, ensuring a seamless user experience.
 
-## Demo
+## Demo 💡
 
 index.html <br>
 <img src="screenshots/index.gif" alt="Demo of the application"> <br>

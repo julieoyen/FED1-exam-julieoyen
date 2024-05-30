@@ -183,7 +183,7 @@ function searchPosts() {
 
       updatePaginationButtons();
     });
-  }, 300); // Adjust debounce time as needed
+  }, 300);
 }
 
 function attachEventListeners() {

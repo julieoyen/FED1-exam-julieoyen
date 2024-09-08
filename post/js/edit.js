@@ -40,7 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
           });
         }
       })
-      .catch((error) => console.error("Error fetching post details:", error));
+      .catch((error) =>
+        console.error("Feil ved henting av innleggdetaljer:", error)
+      );
   }
 
   function setValue(id, value) {
@@ -85,12 +87,12 @@ document.addEventListener("DOMContentLoaded", function () {
           showSuccessMessage();
         } else {
           return response.json().then((data) => {
-            console.error("Failed to update post: " + data.message);
+            console.error("Oppdatering av oppskrift feilet: " + data.message);
           });
         }
       })
       .catch((error) => {
-        console.error("Error updating post:", error);
+        console.error("Feil ved oppdatering av oppskrift", error);
       });
   };
 
@@ -114,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function addDeleteButton(listItem) {
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    deleteButton.textContent = "Slett";
     deleteButton.className = "delete-btn";
     deleteButton.onclick = () => listItem.remove();
     listItem.appendChild(deleteButton);

@@ -19,14 +19,14 @@ let searchTimeout;
 async function fetchPosts() {
   try {
     const response = await fetch(blogPage);
-    if (!response.ok) throw new Error("Network response was not ok");
+    if (!response.ok) throw new Error("Nettverksresponsen var ikke i orden.");
     const data = await response.json();
     allPosts = data.data;
     init();
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Feil ved henting av data:", error);
     content.innerHTML =
-      "<p>Error fetching the blog posts. Please try again later.</p>";
+      "<p>Feil ved henting av oppskrifter. Vennligst prøv igjen senere.</p>";
     content.focus();
   }
 }
@@ -139,7 +139,7 @@ function populateTags() {
       });
     }
   });
-  tagFilter.innerHTML = '<option value="">View all tags</option>';
+  tagFilter.innerHTML = '<option value="">Vis alle tagger</option>';
   tags.forEach((tag) => {
     const option = document.createElement("option");
     option.value = tag;
@@ -239,14 +239,14 @@ async function fetchMainContent() {
     const response = await fetch(
       `https://v2.api.noroff.dev/blog/posts/juliebertine/?limit=${postsPerPage}&page=${currentPage}&_tag=${myTag}`
     );
-    if (!response.ok) throw new Error("Network response was not ok");
+    if (!response.ok) throw new Error("Nettverksresponsen var ikke i orden");
     const data = await response.json();
     mainPosts = data.data;
     appendMain(mainPosts);
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Feil ved henting av data:", error);
     content.innerHTML =
-      "<p>Error fetching the blog posts. Please try again later.</p>";
+      "<p>Feil ved henting av blogginnlegg. Vennligst prøv igjen senere.</p>";
   }
 }
 

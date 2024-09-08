@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorMessage = document.getElementById("error-message");
 
   if (!form || !email || !username || !password || !repeatPassword) {
-    console.error("Essential form elements are missing!");
+    console.error("Obligatoriske felt mangler!");
     return;
   }
 
@@ -37,7 +37,7 @@ function validateEmail(email) {
   if (!emailPattern.test(email.value)) {
     showFieldError(
       "email-error",
-      "Invalid email address. Must be @stud.noroff.no"
+      "Ugyldig e-mail adresse. Må være @stud.noroff.no"
     );
     email.focus();
     return false;
@@ -48,15 +48,12 @@ function validateEmail(email) {
 
 function validatePasswords(password, repeatPassword) {
   if (password.value.length < 8) {
-    showFieldError(
-      "password-error",
-      "Password must be at least 8 characters long."
-    );
+    showFieldError("password-error", "Passordet må inneholde minst 8 tegn");
     password.focus();
     return false;
   }
   if (password.value !== repeatPassword.value) {
-    showFieldError("repeatPassword-error", "Passwords do not match!");
+    showFieldError("repeatPassword-error", "Passordene er ikke like");
     repeatPassword.focus();
     return false;
   }
@@ -102,16 +99,16 @@ function handleResponse(data, errorMessageElement) {
   if (data.status && data.status === "Bad Request") {
     showErrorMessage(
       errorMessageElement,
-      "Registration failed: " +
+      "Registrering mislykkes: " +
         data.errors.map((error) => error.message).join(", ")
     );
   } else if (data.data && data.data.email) {
-    alert("Registration successful! Redirecting to login page...");
+    alert("Registrering vellykket! Du blir omdirigert til innloggingssiden...");
     window.location.href = "/account/login.html";
   } else {
     showErrorMessage(
       errorMessageElement,
-      "Registration failed. Please check the information you provided."
+      "Registrering mislykkes. Vennligst gå igjennom informasjonen du har gitt."
     );
   }
 }
@@ -120,7 +117,7 @@ function handleNetworkError(error, errorMessageElement) {
   console.error("Network Error:", error);
   showErrorMessage(
     errorMessageElement,
-    "Registration failed due to network error!"
+    "Registrering feilet på grunn av nettverksfeil!"
   );
 }
 

@@ -34,7 +34,7 @@
     </header>
     <main>
       <div class="carousel">
-        <h2 id="latest-recipes">latest recipes</h2>
+        <h2 id="latest-recipes">Nye oppskrifter</h2>
         <div
           id="posts-container"
           class="carousel-slides"
@@ -42,27 +42,35 @@
           aria-live="polite"
           aria-atomic="true"
         ></div>
-        <button class="carousel-control prev" aria-label="Previous Slide">
+        <button
+          class="carousel-control prev"
+          aria-label="forrige oppskrift i karusellen"
+        >
           &#10094;
         </button>
-        <button class="carousel-control next" aria-label="Next Slide">
+        <button
+          class="carousel-control next"
+          aria-label="neste oppskrift i karusellen"
+        >
           &#10095;
         </button>
       </div>
       <div class="filter-container">
-        <label for="tag-filter" class="visually-hidden">Filter by tag</label>
-        <select id="tag-filter" aria-label="Filter posts by tag">
-          <option value="all">View all tags</option>
+        <label for="tag-filter" class="visually-hidden"
+          >Filtrer etter tagger</label
+        >
+        <select id="tag-filter" aria-label="filtrer etter tagger">
+          <option value="all">Vis alle tagger</option>
         </select>
-        <p>or</p>
+        <p>eller</p>
         <label for="search-input" class="visually-hidden"
-          >Search for a recipe</label
+          >Søk etter en oppskrift</label
         >
         <input
           type="text"
           id="search-input"
-          placeholder="Search for a recipe"
-          aria-label="Search for a recipe"
+          placeholder="Søk etter en oppskrift"
+          aria-label="Søk etter en oppskrift"
         />
       </div>
       <div
@@ -73,12 +81,17 @@
         <div id="posts-pagination" class="posts-grid"></div>
         <div class="pagination-controls">
           <button onclick="changePage(-1)" aria-label="Previous Page">
-            Prev
+            Forrige
           </button>
-          <button onclick="changePage(1)" aria-label="Next Page">Next</button>
+          <button onclick="changePage(1)" aria-label="Next Page">Neste</button>
         </div>
       </div>
     </main>
-    <footer>&copy; Copyright 2024</footer>
+    <footer>
+      <div>
+        NB! Denne matbloggen er et skoleprosjekt, det er ikke en ekte blogg.
+      </div>
+      <div>&copy; Copyright 2024</div>
+    </footer>
   </body>
 </html>

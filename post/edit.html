@@ -6,7 +6,7 @@
     <meta name="title" content="Edit Recipe - Eating Unprocessed" />
     <meta
       name="description"
-      content="Edit your healthy recipes on Eating Unprocessed, Living well. Use this form to update ingredients, instructions, and images for your recipes."
+      content="Rediger dine oppskrifter på Eating Unprocessed, Living Well. Bruk dette skjemaet for å oppdatere ingredienser, instruksjoner og bilder for oppskriftene dine"
     />
     <link rel="stylesheet" href="/post/css/edit.css" />
     <link rel="stylesheet" href="/styles.css" />
@@ -18,22 +18,22 @@
     />
     <script src="/post/js/edit.js" defer></script>
     <link rel="icon" href="screenshots/03-23.jpg" type="image/png" />
-    <title>Edit Recipe</title>
+    <title>Rediger oppskrift</title>
   </head>
   <body>
     <div class="container">
-      <h1>Edit Recipe</h1>
+      <h1>Rediger oppskrift</h1>
       <form
         id="editPostForm"
         onsubmit="submitEdit(event)"
         aria-describedby="formDescription"
       >
         <p class="visually-hidden" id="formDescription">
-          Use this form to edit your recipe. Fill out the fields and click save
-          when done.
+          Bruk dette skjemaet for å redigere oppskriften din. Fyll ut feltene og
+          klikk lagre når du er ferdig.
         </p>
 
-        <label for="title">Title:</label>
+        <label for="title">Tittel på oppskriften:</label>
         <input
           type="text"
           id="title"
@@ -42,36 +42,37 @@
           aria-required="true"
           aria-labelledby="titleLabel"
         />
-        <span id="titleLabel" class="visually-hidden">Title of the recipe</span>
+        <span id="titleLabel" class="visually-hidden"
+          >Tittel på oppskriften</span
+        >
 
-        <label for="listItem">Add Ingredients:</label>
+        <label for="listItem">Legg til ingredienser:</label>
         <input type="text" id="listItem" aria-labelledby="listItemLabel" />
         <span id="listItemLabel" class="visually-hidden"
-          >Ingredient to add to the list</span
+          >Ingrediens som kan legges til listenIngredient to add to the
+          list</span
         >
         <button
           type="button"
           onclick="addListItem()"
           aria-label="Add ingredient to the list"
         >
-          Add to List
+          Legg til i liste
         </button>
 
         <ul id="list" aria-label="Ingredients list"></ul>
 
-        <label for="body">Recipe Instructions:</label>
+        <label for="body">Fremgangsmåte:</label>
         <textarea id="body" name="body" aria-labelledby="bodyLabel"></textarea>
-        <span id="bodyLabel" class="visually-hidden"
-          >Instructions for the recipe</span
-        >
+        <span id="bodyLabel" class="visually-hidden">Fremgangsmåte</span>
 
-        <label for="tags">Tags (comma-separated):</label>
+        <label for="tags">Tags (kommaseparert):</label>
         <input type="text" id="tags" name="tags" aria-labelledby="tagsLabel" />
         <span id="tagsLabel" class="visually-hidden"
-          >Tags for the recipe, separated by commas</span
+          >Tags til oppskriften, delt med komma i mellom</span
         >
 
-        <label for="mediaUrl">Image URL:</label>
+        <label for="mediaUrl">Bilde URL:</label>
         <input
           type="url"
           id="mediaUrl"
@@ -79,10 +80,10 @@
           aria-labelledby="mediaUrlLabel"
         />
         <span id="mediaUrlLabel" class="visually-hidden"
-          >URL of the image for the recipe</span
+          >"URL til bildet for oppskriften</span
         >
 
-        <label for="mediaAlt">Image Alt Text:</label>
+        <label for="mediaAlt">Alternativ tekst til bildet:</label>
         <input
           type="text"
           id="mediaAlt"
@@ -90,24 +91,22 @@
           aria-labelledby="mediaAltLabel"
         />
         <span id="mediaAltLabel" class="visually-hidden"
-          >Alternative text for the image</span
+          >Alternativ tekst til bildet:</span
         >
 
         <div class="saveCancel">
-          <button id="submitBTN" type="submit">Save</button>
+          <button id="submitBTN" type="submit">Lagre</button>
           <button
             id="cancelBTN"
             type="button"
             onclick="cancelEdit()"
             aria-label="Cancel edit and return to posts"
           >
-            Cancel
+            Avbryt
           </button>
         </div>
       </form>
-      <div id="successMessage" class="success-message">
-        Post successfully saved!
-      </div>
+      <div id="successMessage" class="success-message">Oppskrift oppdatert</div>
     </div>
   </body>
 </html>

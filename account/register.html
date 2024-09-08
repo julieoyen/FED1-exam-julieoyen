@@ -18,11 +18,11 @@
       rel="stylesheet"
     />
     <link rel="icon" href="screenshots/03-23.jpg" type="image/png" />
-    <title>Register</title>
+    <title>Opprett konto</title>
   </head>
   <body>
     <div class="registerPage" aria-labelledby="registerFormLabel">
-      <h1 id="registerFormLabel">Register</h1>
+      <h1 id="registerFormLabel">Opprett konto</h1>
       <form id="registerForm">
         <div
           id="error-message"
@@ -30,8 +30,14 @@
           aria-live="assertive"
           role="alert"
         ></div>
+        <p>
+          <span class="required-asterisk">*</span> Indigerer et obligatorisk
+          felt
+        </p>
 
-        <label for="email">Email:</label>
+        <label for="email"
+          >E-mail<span class="required-asterisk">*</span></label
+        >
         <input
           type="email"
           id="email"
@@ -43,24 +49,26 @@
         />
         <span id="email-error" class="field-error" role="alert"></span>
 
-        <label for="username">Username:</label>
+        <label for="username"
+          >Brukernavn<span class="required-asterisk">*</span></label
+        >
         <input
           type="text"
           id="username"
           name="username"
-          placeholder="required"
           required
           aria-required="true"
           aria-describedby="username-error"
         />
         <span id="username-error" class="field-error" role="alert"></span>
 
-        <label for="password">Password:</label>
+        <label for="password"
+          >Passord<span class="required-asterisk">*</span></label
+        >
         <input
           type="password"
           id="password"
           name="password"
-          placeholder="required"
           required
           minlength="8"
           aria-required="true"
@@ -68,12 +76,13 @@
         />
         <span id="password-error" class="field-error" role="alert"></span>
 
-        <label for="repeatPassword">Repeat password:</label>
+        <label for="repeatPassword"
+          >Gjenta password <span class="required-asterisk">*</span></label
+        >
         <input
           type="password"
           id="repeatPassword"
           name="repeatPassword"
-          placeholder="required"
           required
           minlength="8"
           aria-required="true"
@@ -81,20 +90,19 @@
         />
         <span id="repeatPassword-error" class="field-error" role="alert"></span>
 
-        <label for="avatar">Avatar URL:</label>
+        <label for="avatar">Avatar-URL:</label>
         <input
           type="text"
           id="avatar"
           name="avatar"
-          placeholder="optional"
           aria-describedby="avatar-error"
         />
         <span id="avatar-error" class="field-error" role="alert"></span>
 
-        <button type="submit" class="submit">REGISTER</button>
+        <button type="submit" class="submit">OPPRETT KONTO</button>
       </form>
       <div class="registerLogin">
-        <p>Already have an account? <button id="loginBTN">LOG IN</button></p>
+        <p>Har du allerede en konto? <button id="loginBTN">LOGG IN</button></p>
       </div>
     </div>
   </body>

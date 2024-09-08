@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await fetch(blogPostApi);
       if (!response.ok) {
-        throw new Error("Failed to fetch blog post");
+        throw new Error("Kunne ikke hente oppskrifter");
       }
       const data = await response.json();
       displayBlogPost(data.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Feil ved henting av data:", error);
       postContent.innerHTML =
-        "<p class='error' role='alert'>Error fetching the blog post. Please try again later.</p>";
+        "<p class='error' role='alert'>Feil ved henting av oppskrifter. Vennligst prøv igjen senere..</p>";
       postContent.focus();
     }
   }
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayBlogPost(post) {
     if (!post || !post.title || !post.body || !post.author) {
       postContent.innerHTML =
-        "<p class='error' role='alert'>Incomplete post data. Please try again later.</p>";
+        "<p class='error' role='alert'>Innleggdata er ufullstendige. Vennligst prøv igjen senere.</p>";
       return;
     }
 
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .setAttribute(
         "content",
         post.description ||
-          "Read our latest blog post on Eating Unprocessed. Discover healthy recipes, tips, and more to help you live a healthier lifestyle."
+          "Les våre siste oppskrifter på Eating Unprocessed, Living Well. Oppdag sunne oppskrifter, tips m.m. som kan hjelpe deg på veien til en sunnere livvstil."
       );
 
     const container = document.createElement("article");
@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
           ? `<img src="${post.media.url}" alt="${post.media.alt}" class="postImg">`
           : ""
       }
-      ${ingredientsHTML ? `<h2>Ingredients</h2>${ingredientsHTML}` : ""}
+      ${ingredientsHTML ? `<h2>Ingredienser</h2>${ingredientsHTML}` : ""}
       ${
         instructions
-          ? `<h2>Instructions</h2><div role="document"><p>${instructions.replace(
+          ? `<h2>Fremgangsmåte</h2><div role="document"><p>${instructions.replace(
               /\n/g,
               "</p><p>"
             )}</p></div>`
@@ -78,11 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="bottom" role="contentinfo">
       ${
         post.tags && post.tags.length
-          ? `<p>Tag: <br> ${post.tags.join(", ")}</p>`
+          ? `<p>Passer til: <br> ${post.tags.join(", ")}</p>`
           : ""
       }     
-      <p>Posted: <br> ${new Date(post.created).toLocaleDateString()}</p>
-      <p>Author: <br> ${post.author.name}</p>
+      <p>Publisert: <br> ${new Date(post.created).toLocaleDateString()}</p>
+      <p>Forfatter: <br> ${post.author.name}</p>
       </div>
     `;
     postContent.appendChild(container);

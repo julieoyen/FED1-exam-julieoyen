@@ -22,23 +22,23 @@
       crossorigin="anonymous"
     ></script>
     <link rel="icon" href="screenshots/03-23.jpg" type="image/png" />
-    <title>Blog Dashboard</title>
+    <title>Oversikt over oppskifter</title>
   </head>
   <body>
     <button id="logoutButton" aria-label="Logout" title="Logout">
       <i class="fa-solid fa-right-from-bracket"></i>
     </button>
-    <h1>Welcome, <span id="username">Username</span>!</h1>
+    <h1>Velkommen, <span id="username">Username</span>!</h1>
     <div class="message" role="region" aria-live="polite">
       <h2 class="visually-hidden">
         On this page, there is an overview of all of the posts you have made.
       </h2>
-      <h3>Would you like to edit, delete or make a</h3>
+      <h3>Vil du endre, slette eller lage en</h3>
       <button
         onclick="window.location.href='make.html'"
         aria-label="Create New Post"
       >
-        New Post
+        Ny oppskrift
       </button>
     </div>
     <div id="postsContainer" role="list" aria-label="Blog Posts"></div>

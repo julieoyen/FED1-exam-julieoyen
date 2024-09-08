@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorMessageElement = document.getElementById("error-message");
 
   if (!newPostForm || !list || !addListItemButton || !errorMessageElement) {
-    console.error("Essential elements are missing from the DOM.");
+    console.error("Essensielle elementer mangler i DOM-en.");
     return;
   }
 
@@ -23,7 +23,10 @@ function handleFormSubmit(event, errorMessageElement) {
   const authToken = sessionStorage.getItem("authToken");
 
   if (!userName || !authToken) {
-    showError(errorMessageElement, "User not authenticated. Please log in.");
+    showError(
+      errorMessageElement,
+      "Bruker ikke autentisert. Vennligst logg inn."
+    );
     window.location.href = "/account/login.html";
     return;
   }
@@ -38,7 +41,7 @@ function handleFormSubmit(event, errorMessageElement) {
   const mediaAlt = document.getElementById("mediaAlt").value.trim();
 
   if (!title || !body) {
-    showError(errorMessageElement, "Title and body are required.");
+    showError(errorMessageElement, "Tittel og tekst er obligatorisk");
     return;
   }
 
@@ -76,11 +79,17 @@ async function createPost(postUrl, authToken, postData, errorMessageElement) {
     if (data.data) {
       showSuccessMessage();
     } else {
-      showError(errorMessageElement, "Failed to create post: " + data.message);
+      showError(
+        errorMessageElement,
+        "Kunne ikke opprette oppskrift: " + data.message
+      );
     }
   } catch (error) {
-    console.error("Error creating new post:", error);
-    showError(errorMessageElement, "Error creating post: " + error.message);
+    console.error("Feil ved oppretting av ny oppskrift:", error);
+    showError(
+      errorMessageElement,
+      "Feil ved oppretting av ny oppskrift:" + error.message
+    );
   }
 }
 
@@ -99,7 +108,7 @@ function addListItem() {
 
 function addDeleteButton(listItem) {
   const deleteButton = document.createElement("button");
-  deleteButton.textContent = "Delete";
+  deleteButton.textContent = "Slett";
   deleteButton.className = "delete-btn";
   deleteButton.addEventListener("click", () => listItem.remove());
   listItem.appendChild(deleteButton);

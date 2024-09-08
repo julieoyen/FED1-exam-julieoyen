@@ -2,7 +2,10 @@ body{
   margin: 0;
   background-color: #EDEEE9;
 }
-
+.required-asterisk {
+  color: red;
+  font-weight: bold;
+}
 h1 {
     font-family: 'Titan One', sans-serif;
     color: #1D906C;
@@ -188,6 +191,7 @@ form {
   display: block;
   color: red;
   font-weight: bold;
+  font-family: 'nunito', 'Times New Roman', Times, serif;
 }
 
 /* ARIA FRIENDLY */ 
@@ -235,7 +239,11 @@ footer {
       justify-self: center;
       align-self:center;
       align-items: center;
+      max-width: 600px;
+      padding-top: 20px;
+
     }
+    
 
     .success-message{
       padding: 40px;

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorMessage = document.getElementById("error-message");
 
   if (!loginForm || !email || !password || !errorMessage) {
-    console.error("Essential form elements are missing!");
+    console.error("Obligatoriske felt mangler!");
     return;
   }
 
@@ -38,7 +38,7 @@ async function handleLogin(
   if (!email || !password) {
     showErrorMessage(
       errorMessageElement,
-      "Please enter both email and password."
+      "Vennligst fyll inn både e-post og passord"
     );
     emailElement.focus();
     return;
@@ -66,14 +66,14 @@ async function handleLogin(
     } else {
       showErrorMessage(
         errorMessageElement,
-        "Login failed: " + (data.message || "Incorrect email or password")
+        "Innlogging feilet: " + (data.message || "Feil e-mail eller passord")
       );
     }
   } catch (error) {
-    console.error("Error during login:", error);
+    console.error("Feil under pålogging:", error);
     showErrorMessage(
       errorMessageElement,
-      "An error occurred during login. Please try again later."
+      "Det oppstod en feil under pålogging. Vennligst prøv igjen senere."
     );
   }
 }

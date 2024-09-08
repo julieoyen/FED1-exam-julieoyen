@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     usernameElement.textContent = username;
     fetchPosts(username, authToken);
   } else {
-    alert("User not authenticated. Please log in.");
+    alert("Bruker ikke autentisert. Vennligst logg inn.");
     window.location.href = "/account/login.html";
     return;
   }
@@ -28,16 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       });
       if (!response.ok) {
-        throw new Error("Failed to fetch posts");
+        throw new Error("Kunne ikke hente oppskrifter");
       }
       const data = await response.json();
       posts = data.data;
       displayPage(currentPage);
       setupPagination();
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error("Feil ved henting av oppskrifter", error);
       postsContainer.innerHTML =
-        "<p class='error' role='alert'>Error fetching posts. Please try again later.</p>";
+        "<p class='error' role='alert'>Feil ved henting av oppskrifter. Vennligst prøv igjen senere.</p>";
       postsContainer.focus();
     }
   }
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const paginatedPosts = posts.slice(start, end);
 
     if (!paginatedPosts.length) {
-      postsContainer.innerHTML = "<p>No posts available.</p>";
+      postsContainer.innerHTML = "<p>Ingen oppskrifter tilgjengelige</p>";
       return;
     }
 
@@ -67,10 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
                   }
               </div>
               <div class="buttons" role="group" aria-label="Post actions">
-                  <button class="edit-btn" data-id="${post.id}">Edit</button>
-                  <button class="delete-btn" data-id="${
-                    post.id
-                  }">Delete</button>
+                  <button class="edit-btn" data-id="${post.id}">Rediger</button>
+                  <button class="delete-btn" data-id="${post.id}">Slett</button>
               </div>
           `;
       postsContainer.appendChild(postElement);
@@ -123,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function deletePost(postId) {
     const deleteUrl = `https://v2.api.noroff.dev/blog/posts/${username}/${postId}`;
-    if (confirm("Are you sure you want to delete this post?")) {
+    if (confirm("Er du sikker på at du vil slette oppskriften?")) {
       try {
         const response = await fetch(deleteUrl, {
           method: "DELETE",
@@ -132,24 +130,24 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         });
         if (response.ok) {
-          alert("Post deleted successfully!");
+          alert("Oppskrift slettet");
           fetchPosts(username, authToken);
         } else {
-          alert("Failed to delete post.");
+          alert("Kunne ikke slette oppskrift");
         }
       } catch (error) {
-        console.error("Error deleting post:", error);
-        alert("Error deleting post: " + error.message);
+        console.error("Feil ved sletting av oppskrift", error);
+        alert("Feil ved sletting av oppskrift " + error.message);
       }
     }
   }
 
   const logoutButton = document.getElementById("logoutButton");
   logoutButton.addEventListener("click", () => {
-    if (confirm("Are you sure you want to log out?")) {
+    if (confirm("Er du sikker på at du vil logge ut?")) {
       sessionStorage.removeItem("userName");
       sessionStorage.removeItem("authToken");
-      alert("You have been logged out.");
+      alert("Du er logget ut.");
       window.location.href = "/account/login.html";
     }
   });

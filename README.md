@@ -42,8 +42,8 @@ make.html <br>
 ## Installation 🎥
 
 To launch this project, click on one of the following links: <br>
-🙋‍♀️ [User-Environemnt](https://fed1-exam-julieoyen.netlify.app/) <br>
-🔐 [Admin-Environemnt](https://fed1-exam-julieoyen.netlify.app/login.html)
+🙋‍♀️ [User-Environment](https://fed1-exam-julieoyen.netlify.app/) <br>
+🔐 [Admin-Environment](https://fed1-exam-julieoyen.netlify.app/account/login.html)
 
 ## Usage 🔧
 
